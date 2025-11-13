@@ -1,0 +1,62 @@
+:root {
+    --primario: #27418C;
+    --secundario: #2D61A6;
+    --terciario: #73A9D9;
+    --contraste: #F25C93;
+    --escuro: #110E26;
+    --color-claro: #eee
+    --color-meio-claro: #ccc;
+    --color-meio-escuro: #999
+    --color-escuro: #555;
+    --font-size-titulo-secao: 3rem;
+    --font-weight-titulo-secao: 600;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--escuro);   
+    padding: 16px 96px;
+}
+
+header img {
+    width: 260px;
+    height: 80px;
+}
+
+header nav {
+    display: flex;
+    gap: 80px;
+    align-items: center;
+}
+
+header nav a {
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.links {
+    display: flex;
+    gap: 36px;
+}
+
+.header-cta {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+.cta-button {
+    background-color: var(--contraste);
+    color: #fff;
+    border-radius: 12px;
+}
+
+.header-cta .cta-button{
+    padding: 10px 16px;
+}
