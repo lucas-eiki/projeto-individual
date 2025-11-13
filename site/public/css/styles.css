@@ -4,7 +4,7 @@
     --terciario: #73A9D9;
     --contraste: #F25C93;
     --escuro: #110E26;
-    --color-claro: #eee
+    --color-claro: #eee;
     --color-meio-claro: #ccc;
     --color-meio-escuro: #999
     --color-escuro: #555;
@@ -59,4 +59,55 @@ header nav a {
 
 .header-cta .cta-button{
     padding: 10px 16px;
+}
+
+
+
+.hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../assets/images/animacoes.jpg);
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 64px;
+    padding-bottom: 128px;
+    height: 800px;
+}
+
+.hero-info {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 1090px;
+}
+
+.hero-info h1 {
+    color: #fff;
+    font-size: 6rem;
+}
+
+.hero-info p {
+    color: var(--color-meio-claro);
+    font-size: 2rem;
+}
+
+.hero-cta {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.hero-cta .cta-button {
+    font-size: 2rem;
+    padding: 16px 32px;
+}
+
+.hero-cta p {
+    color: var(--color-meio-claro);
+    font-size: 1.25rem;
 }
