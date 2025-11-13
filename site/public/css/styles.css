@@ -88,6 +88,7 @@ header nav a {
 .hero-info h1 {
     color: #fff;
     font-size: 6rem;
+    line-height: 90%;
 }
 
 .hero-info p {
