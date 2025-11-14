@@ -266,3 +266,62 @@ h2 {
     font-size: 1.5rem;
     color: var(--color-escuro);
 }
+
+
+
+#licoes {
+    background-color: var(--escuro);
+    color: #fff;
+    padding: 64px 0 128px 0;
+}
+
+#licoes .licoes-info {
+    margin-bottom: 48px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.licoes-info p {
+    color: var(--color-meio-claro);
+    width: 1064px;
+    font-size: 1.5rem;
+}
+
+.citacoes {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.citacoes li {
+    display: flex;
+    align-items: center;
+    width: 1208px;
+    justify-content: space-between;
+}
+
+.citacoes li.reverso {
+    flex-direction: row-reverse;
+}
+
+.citacoes .citacao-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-size: 1.5rem;
+    width: 780px;
+}
+
+.credito {
+    color: var(--color-meio-claro);
+}
+
+.citacoes li img {
+    width: 350px;
+    height: 350px;
+    object-fit: cover;
+}
