@@ -343,7 +343,7 @@ h2 {
     font-weight: var(--font-weight-titulo-secao);
 }
 
-.cta-button {
+.cta .cta-button {
     padding: 24px 128px;
     background-color: var(--contraste);
     font-size: 2rem;
