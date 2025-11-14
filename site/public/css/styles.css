@@ -248,6 +248,7 @@ h2 {
     height: 400px;
     object-fit: cover;
     margin-bottom: 16px;
+    border-radius: 8px;
 }
 
 .tipo-info {
@@ -324,6 +325,7 @@ h2 {
     width: 350px;
     height: 350px;
     object-fit: cover;
+    border-radius: 8px;
 }
 
 
