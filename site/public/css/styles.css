@@ -347,3 +347,33 @@ h2 {
     font-size: 2rem;
     border-radius: 24px;
 }
+
+
+
+#sobre {
+    background-color: var(--secundario);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 128px;
+    padding: 64px 0;
+    color: #fff;
+}
+
+#sobre img {
+    width: 370px;
+    height: 500px;
+    border-radius: 8px;
+}
+
+#sobre .sobre-info {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 950px;
+}
+
+.sobre-info p {
+    font-size: 2rem;
+    color: var(--color-claro);
+}
