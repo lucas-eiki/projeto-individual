@@ -6,7 +6,7 @@
     --escuro: #110E26;
     --color-claro: #eee;
     --color-meio-claro: #ccc;
-    --color-meio-escuro: #999
+    --color-meio-escuro: #999;
     --color-escuro: #555;
     --font-size-titulo-secao: 3rem;
     --font-weight-titulo-secao: 600;
@@ -111,4 +111,100 @@ header nav a {
 .hero-cta p {
     color: var(--color-meio-claro);
     font-size: 1.25rem;
+}
+
+
+
+h2 {
+    font-size: var(--font-size-titulo-secao);
+    font-weight: var(--font-weight-titulo-secao);
+}
+
+#definicao {
+    padding: 128px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 128px;
+}
+
+.definicao-info {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    max-width: 670px;
+}
+
+.info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.info-container .p-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.info-container p {
+    color: var(--color-escuro);
+    font-size: 1.5rem;
+}
+
+.definicao-cta {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.definicao-cta p {
+    font-size: 1.25rem;
+    color: #666666;
+}
+
+.definicao-cta .definicao-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: fit-content;
+}
+
+.fps-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.fps-buttons button {
+    background-color: var(--primario);
+    color: #fff;
+    padding: 12px 32px;
+    border-radius: 12px;
+    box-shadow: 0 8px #1D3373;
+    font-size: 1.5rem;
+}
+
+.definicao-buttons .cta-button {
+    padding: 12px 32px;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    width: fit-content;
+}
+
+.definicao-buttons .cta-button::before {
+    content: '';
+    background-image: url(../assets/images/icons/start-icon.png);
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+#definicao img {
+    height: stretch;
+    width: 470px;
+    object-fit: cover;
 }
