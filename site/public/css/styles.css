@@ -325,3 +325,25 @@ h2 {
     height: 350px;
     object-fit: cover;
 }
+
+
+
+.cta {
+    background-color:  var(--terciario);
+    padding: 64px 128px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cta-container p {
+    color: #333;
+    font-size: 32px;
+    font-weight: var(--font-weight-titulo-secao);
+}
+
+.cta-button {
+    padding: 24px 128px;
+    background-color: var(--contraste);
+    font-size: 2rem;
+    border-radius: 24px;
+}
