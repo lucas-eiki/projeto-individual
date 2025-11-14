@@ -121,7 +121,7 @@ header nav a {
     padding: 16px 32px;
 }
 
-.hero-cta p {
+.hero-cta a {
     color: var(--color-meio-claro);
     font-size: 1.25rem;
 }
