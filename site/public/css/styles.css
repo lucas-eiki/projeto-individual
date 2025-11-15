@@ -37,7 +37,7 @@ header {
     top: 0;
 }
 
-header img {
+.logo-animotion {
     width: 260px;
     height: 80px;
 }
@@ -388,11 +388,6 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-footer img {
-    width: 260px;
-    height: 80px;
 }
 
 footer p {
