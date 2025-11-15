@@ -379,3 +379,62 @@ h2 {
     font-size: 2rem;
     color: var(--color-claro);
 }
+
+
+
+footer {
+    padding: 32px 64px;
+    background-color: var(--primario);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer img {
+    width: 260px;
+    height: 80px;
+}
+
+footer p {
+    height: stretch;
+    display: flex;
+    align-items: flex-end;
+    color: var(--color-meio-claro);
+}
+
+footer .contatos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    gap: 16px;
+}
+
+.contatos h2 {
+    font-size: 2rem;
+}
+
+.contatos-container .redes-sociais {
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+}
+
+.redes-sociais img {
+    width: 50px;
+    height: 50px;
+}
+
+.email-container {
+    font-size: 1.5rem;
+}
+
+.email-container h4 {
+    font-weight: var(--font-weight-titulo-secao);
+}
+
+.email-container p {
+    color: var(--color-claro);
+}
