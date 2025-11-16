@@ -6,7 +6,7 @@
     --contraste-hover: #d15180;
     --escuro: #110E26;
     --color-claro: #eee;
-    --color-meio-claro: #ccc;
+    --color-meio-claro: #bbb;
     --color-meio-escuro: #999;
     --color-escuro: #555;
     --font-size-titulo-secao: 3rem;
@@ -54,7 +54,7 @@ header nav {
 }
 
 header nav a {
-    color: #fff;
+    color: var(--color-claro);
     font-size: 1.5rem;
 }
 
@@ -104,7 +104,7 @@ header nav a {
 }
 
 .hero-info h1 {
-    color: #fff;
+    color: var(--color-claro);
     font-size: 6rem;
     line-height: 90%;
 }
@@ -137,6 +137,7 @@ header nav a {
 h2 {
     font-size: var(--font-size-titulo-secao);
     font-weight: var(--font-weight-titulo-secao);
+    color: var(--escuro);
 }
 
 #definicao {
@@ -196,7 +197,7 @@ h2 {
 
 .fps-buttons button {
     background-color: var(--primario);
-    color: #fff;
+    color: var(--color-claro);
     padding: 12px 32px;
     border-radius: 12px;
     box-shadow: 0 8px #1D3373;
@@ -266,6 +267,7 @@ h2 {
     font-weight: var(--font-weight-titulo-secao);
     text-align: center;
     margin-bottom: 4px;
+    color: var(--escuro);
 }
 
 .tipo-info p {
@@ -278,7 +280,7 @@ h2 {
 
 #licoes {
     background-color: var(--escuro);
-    color: #fff;
+    color: var(--color-claro);
     padding: 64px 0 128px 0;
 }
 
@@ -365,7 +367,6 @@ h2 {
     align-items: center;
     gap: 128px;
     padding: 64px 0;
-    color: #fff;
 }
 
 #sobre img {
@@ -379,6 +380,10 @@ h2 {
     flex-direction: column;
     gap: 24px;
     width: 950px;
+}
+
+.sobre-info h2 {
+    color: var(--color-claro);
 }
 
 .sobre-info p {
@@ -408,7 +413,7 @@ footer .contatos {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #fff;
+    color: var(--color-claro);
     gap: 16px;
 }
 
@@ -459,6 +464,7 @@ footer .contatos {
 .login-container h1 {
     font-size: 2.5rem;
     font-weight: 500;
+    color: var(--escuro);
 }
 
 .inputs-container {
