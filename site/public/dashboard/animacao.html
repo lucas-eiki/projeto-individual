@@ -9,9 +9,11 @@
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/dashboard.css">
+
+    <script src="../js/sessao.js"></script>
 </head>
 
-<body onload="exibirAnimacao()">
+<body onload="validarSessao() ,exibirAnimacao()">
     <header>
         <img class="logo-animotion" src="../assets/images/animotion-logo.png" alt="logo animotion">
 
@@ -21,10 +23,10 @@
                 <li><a href="./estatisticas.html">Estatísticas</a></li>
             </ul>
             <div class="perfil-container">
-                <img src="" alt="imagem de perfil">
+                <img id="imagem-perfil" src="" alt="imagem de perfil">
                 <div class="perfil-info-container">
                     <span id="apelido-usuario">Apelido</span>
-                    <span class="email-usuario">E-mail</span>
+                    <span id="email-usuario">E-mail</span>
                 </div>
                 <div class="perfil-links-container">
                     <a class="perfil-button perfil-link" href="./perfil.html">Perfil</a>
