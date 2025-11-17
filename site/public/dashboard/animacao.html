@@ -71,7 +71,6 @@
     const mainContainer = document.getElementById('animacao-container')
 
     function exibirAnimacao() {
-        // let id_animacao = sessionStorage.ID_ANIMACAO
 
         fetch(`/animacoes/buscar/${sessionStorage.getItem("ID_ANIMACAO")}`).then(function (resposta) {
             if (resposta.ok) {
