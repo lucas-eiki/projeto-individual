@@ -96,8 +96,10 @@
                         
                         ul_lista_animacoes.innerHTML += `
                             <li>
-                                <img src="${animacao.imagem}" alt="Imagem da animação ${animacao.titulo}">
-                                <h2>${animacao.titulo}</h2>
+                                <button onclick="verAnimacao(${animacao.id})">
+                                    <img src="${animacao.imagem}" alt="Imagem da animação ${animacao.titulo}">
+                                    <h2>${animacao.titulo}</h2>
+                                </button>
                             </li>
                         `
                     }
@@ -109,5 +111,11 @@
         }).catch(function (resposta) {
             console.error(resposta)
         })
+    }
+
+    function verAnimacao(id_animacao) {
+        sessionStorage.ID_ANIMACAO = id_animacao 
+
+        window.location = "./animacao.html"
     }
 </script>

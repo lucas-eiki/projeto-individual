@@ -7,4 +7,11 @@ function listar() {
     return database.executar(instrucaoSql);
 }
 
-module.exports = { listar };
+function buscarPorId(id) {
+    var instrucaoSql = `SELECT id, titulo, sinopse, ano_lancamento, imagem, classificacao, id_categoria FROM animacao WHERE id = ${id}`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+module.exports = { listar, buscarPorId };
