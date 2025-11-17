@@ -26,8 +26,8 @@ function autenticar(req, res) {
                             data_nascimento: resultadoAutenticar[0].data_nascimento,
                             email: resultadoAutenticar[0].email,
                             senha: resultadoAutenticar[0].senha,
-                            apelido: resultadoAutenticar[0].apelido,
-                            imagem_perfil: resultadoAutenticar[0].imagem_perfil
+                            apelido: resultadoAutenticar[0].apelido == null ? resultadoAutenticar[0].nome : resultadoAutenticar[0].apelido,
+                            imagem_perfil: resultadoAutenticar[0].imagem_perfil == null ? '../assets/avatar/avatar-generico.jpg' : resultadoAutenticar[0].imagem_perfil
                         });
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
