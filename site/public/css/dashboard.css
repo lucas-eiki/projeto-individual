@@ -10,9 +10,16 @@ header nav {
     position: relative;
 }
 
+.perfil-container #imagem-perfil {
+    width: 55px;
+    height: 55px;
+    border-radius: 30px;
+}
+
 .perfil-info-container {
     display: flex;
     flex-direction: column;
+    gap: 8px;
 }
 
 .perfil-links-container {
