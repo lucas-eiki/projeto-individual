@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 
-<body>
+<body onload="exibirAnimacoes()">
     <header>
         <img class="logo-animotion" src="../assets/images/animotion-logo.png" alt="logo animotion">
 
@@ -75,3 +75,39 @@
 </body>
 
 </html>
+
+<script>
+    let ul_lista_animacoes = document.getElementById('lista-animacoes')
+
+    function exibirAnimacoes() {
+        fetch('/animacoes/listar').then(function (resposta) {
+            if (resposta.ok) {
+
+                if (resposta.status == 204) {
+                    ul_lista_animacoes.innerHTML = '<li>Nenhuma animação encontrada</li>'
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                console.log(resposta)
+
+                resposta.json().then(resposta => {
+                    for(let i = 0; i < resposta.length; i++) {
+                        let animacao = resposta[i]
+                        
+                        ul_lista_animacoes.innerHTML += `
+                            <li>
+                                <img src="${animacao.imagem}" alt="Imagem da animação ${animacao.titulo}">
+                                <h2>${animacao.titulo}</h2>
+                            </li>
+                        `
+                    }
+                })
+            }
+            else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta)
+        })
+    }
+</script>
