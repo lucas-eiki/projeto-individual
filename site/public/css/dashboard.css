@@ -136,9 +136,10 @@ header nav {
 }
 
 .animacao-container img {
-    width: 300px;
-    height: 400px;
+    width: 312px;
+    height: 468px;
     margin-bottom: 8px;
+    object-fit: cover;
 }
 
 .animacao-container h2 {
