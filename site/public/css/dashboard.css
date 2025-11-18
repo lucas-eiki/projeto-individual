@@ -230,9 +230,16 @@ header nav {
 
 .animacao-info-container .titulo-container .detalhes {
     display: flex;
+    align-items: center;
     gap: 32px;
     color: var(--color-escuro);
     font-size: 1.5rem;
+}
+
+.classificacao-indicativa, 
+.img-classificacao-indicativa {
+    width: 28px;
+    height: 28px;
 }
 
 #generos-container {
