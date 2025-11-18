@@ -40,6 +40,7 @@ header {
     padding: 16px 96px;
     position: sticky;
     top: 0;
+    z-index: 1;
 }
 
 .logo-animotion {
