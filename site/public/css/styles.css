@@ -491,6 +491,23 @@ footer .contatos {
     width: 100%;
 }
 
+.inputs-container .senha-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.senha-container a {
+    color: var(--color-meio-escuro);
+    margin-left: 12px;
+    font-size: 1.25rem;
+    width: fit-content;
+}
+
+.senha-container a:hover {
+    text-decoration: underline;
+}
+
 .inputs-container input {
     background-color: var(--color-claro);
     color: var(--color-meio-escuro);
