@@ -26,7 +26,6 @@ header nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
     position: absolute;
     bottom: -112px;
     left: 50%;
@@ -37,27 +36,43 @@ header nav {
 }
 
 .perfil-links-container .perfil-link{
-    padding: 8px;
+    padding: 16px;
     font-size: 1.25rem;
     border-bottom: 1px solid #ccc;
     width: 100%;
     text-align: center;
 }
 
-.perfil-link:first-child{
-    padding-top: 16px;
+.perfil-link:first-child {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 .perfil-link:last-child {
-    padding-bottom: 16px;
     border-bottom: none;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
 .perfil-links-container a {
     color: var(--escuro);
 }
 
+.perfil-link:hover {
+    background-color: #dddddd;
+}
+
 .perfil-links-container .sair-button {
     color: red;
-    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.sair-button::before {
+    content: url(../assets/images/icons/sign-out.svg);
+    width: 20px;
+    height: 20px;
 }
