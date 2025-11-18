@@ -294,6 +294,10 @@ h2 {
     gap: 12px;
 }
 
+.licoes-info h2 {
+    color: var(--color-claro);
+}
+
 .licoes-info p {
     color: var(--color-meio-claro);
     width: 1064px;
