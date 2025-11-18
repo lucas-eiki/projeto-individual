@@ -36,11 +36,11 @@
         </nav>
     </header>
 
-    <main>
+    <main class="main-animacoes">
         <div class="titulo-container">
             <h1>Lista de animações</h1>
             <button>
-                <img src="" alt="ícone de filtro">
+                <img src="../assets/images/icons/slider.svg" alt="ícone de filtro">
                 <span>Filtros</span>
             </button>
         </div>
@@ -95,11 +95,12 @@
                 resposta.json().then(resposta => {
                     for(let i = 0; i < resposta.length; i++) {
                         let animacao = resposta[i]
+                        let imagem = animacao.imagem == null ? 'https://placehold.co/300x400' : animacao.imagem
                         
                         ul_lista_animacoes.innerHTML += `
-                            <li>
-                                <button onclick="verAnimacao(${animacao.id})">
-                                    <img src="${animacao.imagem}" alt="Imagem da animação ${animacao.titulo}">
+                            <li class="animacao">
+                                <button class="animacao-container" onclick="verAnimacao(${animacao.id})">
+                                    <img src="${imagem}" alt="Imagem da animação ${animacao.titulo}">
                                     <h2>${animacao.titulo}</h2>
                                 </button>
                             </li>
