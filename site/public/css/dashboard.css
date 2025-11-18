@@ -3,11 +3,23 @@ header nav {
 }
 
 .perfil-container {
+    position: relative;
+}
+
+.btn-perfil-container {
     display: flex;
     align-items: center;
     gap: 16px;
     color: var(--color-claro);
-    position: relative;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: .2s ease;
+}
+
+.btn-perfil-container:hover {
+    background-color: var(--primario);
 }
 
 .perfil-container #imagem-perfil {
@@ -19,11 +31,13 @@ header nav {
 .perfil-info-container {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 8px;
+    font-size: 1rem;
 }
 
 .perfil-links-container {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     position: absolute;
@@ -33,6 +47,10 @@ header nav {
     background-color: var(--color-claro);
     width: 120%;
     border-radius: 8px;
+}
+
+.perfil-links-container.aberto {
+    display: flex;
 }
 
 .perfil-links-container .perfil-link {

@@ -23,12 +23,14 @@
                 <li><a href="./estatisticas.html">Estatísticas</a></li>
             </ul>
             <div class="perfil-container">
-                <img id="imagem-perfil" src="" alt="imagem de perfil">
-                <div class="perfil-info-container">
-                    <span id="apelido-usuario">Apelido</span>
-                    <span id="email-usuario">E-mail</span>
-                </div>
-                <div class="perfil-links-container">
+                <button onclick="toggleLinksPerfil()" class="btn-perfil-container">
+                    <img id="imagem-perfil" src="" alt="imagem de perfil">
+                    <div class="perfil-info-container">
+                        <span id="apelido-usuario">Apelido</span>
+                        <span id="email-usuario">E-mail</span>
+                    </div>
+                </button>
+                <div id="div-perfil-links" class="perfil-links-container">
                     <a class="perfil-button perfil-link" href="./perfil.html">Perfil</a>
                     <button onclick="finalizarSessao()" class="sair-button perfil-link">Sair</button>
                 </div>

@@ -19,3 +19,8 @@ function finalizarSessao() {
     sessionStorage.clear();
     window.location = "../index.html";
 }
+
+function toggleLinksPerfil() {
+    const div_perfil_links = document.getElementById('div-perfil-links')
+    div_perfil_links.classList.toggle('aberto')
+}

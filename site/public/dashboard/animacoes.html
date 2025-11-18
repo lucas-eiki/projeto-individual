@@ -23,12 +23,14 @@
                 <li><a href="./estatisticas.html">Estatísticas</a></li>
             </ul>
             <div class="perfil-container">
-                <img id="imagem-perfil" src="" alt="imagem de perfil">
-                <div class="perfil-info-container">
-                    <span id="apelido-usuario">Apelido</span>
-                    <span id="email-usuario">E-mail</span>
-                </div>
-                <div class="perfil-links-container">
+                <button onclick="toggleLinksPerfil()" class="btn-perfil-container">
+                    <img id="imagem-perfil" src="" alt="imagem de perfil">
+                    <div class="perfil-info-container">
+                        <span id="apelido-usuario">Apelido</span>
+                        <span id="email-usuario">E-mail</span>
+                    </div>
+                </button>
+                <div id="div-perfil-links" class="perfil-links-container">
                     <a class="perfil-button perfil-link" href="./perfil.html">Perfil</a>
                     <button onclick="finalizarSessao()" class="sair-button perfil-link">Sair</button>
                 </div>
@@ -93,10 +95,10 @@
                 console.log(resposta)
 
                 resposta.json().then(resposta => {
-                    for(let i = 0; i < resposta.length; i++) {
+                    for (let i = 0; i < resposta.length; i++) {
                         let animacao = resposta[i]
                         let imagem = animacao.imagem == null ? 'https://placehold.co/312x468' : animacao.imagem
-                        
+
                         ul_lista_animacoes.innerHTML += `
                             <li class="animacao">
                                 <button class="animacao-container" onclick="verAnimacao(${animacao.id})">
@@ -117,7 +119,7 @@
     }
 
     function verAnimacao(id_animacao) {
-        sessionStorage.ID_ANIMACAO = id_animacao 
+        sessionStorage.ID_ANIMACAO = id_animacao
 
         window.location = "./animacao.html"
     }
