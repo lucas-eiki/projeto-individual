@@ -83,7 +83,7 @@ header nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 32px 128px;
+    padding: 32px 96px;
     gap: 16px;
 }
 
