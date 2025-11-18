@@ -62,6 +62,21 @@ header nav {
     background-color: #dddddd;
 }
 
+.perfil-links-container .perfil-button {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+
+.perfil-button::before {
+    content: url(../assets/images/icons/config.svg);
+    width: 22px;
+    height: 22px;
+}
+
 .perfil-links-container .sair-button {
     color: red;
     cursor: pointer;
