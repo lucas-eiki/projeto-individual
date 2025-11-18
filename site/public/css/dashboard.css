@@ -183,3 +183,98 @@ header nav {
     font-size: 2rem;
     font-weight: 500;
 }
+
+
+
+.main-animacao {
+    padding: 64px 256px;
+}
+
+.main-animacao a {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    font-size: 1.5rem;
+    width: fit-content;
+}
+
+.main-animacao a:hover {
+    text-decoration: underline;
+}
+
+.main-animacao a::before {
+    content: url(../assets/images/icons/voltar.svg);
+    width: 24px;
+    height: 24px;
+}
+
+.main-animacao #animacao-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 96px;
+    width: 100%;
+}
+
+#animacao-container .animacao-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.animacao-info-container .titulo-container h1 {
+    color: var(--escuro);
+    font-size: var(--font-size-titulo-secao);
+    font-weight: var(--font-weight-titulo-secao);
+    margin-bottom: 8px;
+}
+
+.animacao-info-container .titulo-container .detalhes {
+    display: flex;
+    gap: 32px;
+    color: var(--color-escuro);
+    font-size: 1.5rem;
+}
+
+#generos-container {
+    display: flex;
+    gap: 24px;
+    color: var(--color-escuro);
+    font-size: 1.5rem;
+}
+
+.avaliacao-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nota-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.nota-container img {
+    width: 32px;
+    height: 32px;
+}
+
+.avaliacao-container .p-nota {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.avaliacao-container .p-numero-avaliacoes {
+    font-size: 1.5rem;
+    color: var(--color-escuro);
+}
+
+.sinopse {
+    color: var(--color-escuro);
+    font-size: 1.75rem;
+}
+
+#animacao-container .imagem-animacao {
+    width: 456px;
+    height: 684px;
+}

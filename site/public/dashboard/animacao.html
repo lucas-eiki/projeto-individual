@@ -38,7 +38,7 @@
         </nav>
     </header>
 
-    <main>
+    <main class="main-animacao">
         <a href="./animacoes.html">Voltar</a>
         <div id="animacao-container"></div>
     </main>
@@ -102,18 +102,21 @@
                                     <li class="categoria">${animacao.categoria}</li>
                                 </ul>
                             </div>
-                            <ul class="generos-container">
+                            <ul id="generos-container">
                                 <li>genero</li>
                             </ul>
                             <div class="avaliacao-container">
-                                <p><span class="nota"></span>/5</p>
-                                <p>(<span class="numero-avaliacoes"></span> avaliações)</p>
+                                <div class="nota-container">
+                                    <img src="../assets/images/icons/estrela.png" alt="ícone de estrela">
+                                    <p class="p-nota"><span id="nota"></span>/5</p>
+                                </div>
+                                <p class="p-numero-avaliacoes">(<span id="numero-avaliacoes"></span> avaliações)</p>
                             </div>
                             <p class="sinopse">${animacao.sinopse}</p>
                         </div>
 
                     
-                        <img src="${animacao.imagem}" alt="Imagem da animação">
+                        <img class="imagem-animacao" src="${animacao.imagem}" alt="Imagem da animação">
                     `
                 })
             }
