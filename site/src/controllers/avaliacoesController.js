@@ -19,11 +19,12 @@ function enviar(req, res) {
     const id_usuario = req.params.id_usuario
     const nota = req.body.nota
     const comentario = req.body.comentario
+    const data_avaliacao = req.body.data_avaliacao
 
     if (nota == undefined) {
         res.status(400).send("A nota está indefinida!");
     } else {
-        avaliacoesModel.enviar(id_animacao, id_usuario, nota, comentario)
+        avaliacoesModel.enviar(id_animacao, id_usuario, nota, comentario, data_avaliacao)
             .then(
                 function (resultado) {
                     res.json(resultado);

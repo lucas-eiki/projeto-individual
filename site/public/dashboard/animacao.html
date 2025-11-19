@@ -194,7 +194,7 @@
                                         <div class="comentario-info">
                                             <div class="avaliacao-info">
                                                 <div id="qtd-estrelas"></div>
-                                                <div class="data-avaliacao">${avaliacao.data}</div>
+                                                <div class="data-avaliacao">${avaliacao.data_avaliacao}</div>
                                             </div>
                                             <span class="nome-usuario">${avaliacao.apelido}</span>
                                         </div>
@@ -247,9 +247,17 @@
     function enviarAvaliacao() {
         document.getElementById('avaliar').classList.remove('aberto')
 
+        const dataAtual = new Date()
+
+        let dataBrasil = dataAtual.toLocaleDateString('pt-br')
+
+        const [dia, mes, ano] = dataBrasil.split('/');
+        const dataFormatada = `${ano}-${mes}-${dia}`;
+
         var corpo = {
             nota: nota,
-            comentario: document.getElementById('comentario-avaliacao').value
+            comentario: document.getElementById('comentario-avaliacao').value,
+            data_avaliacao: dataFormatada
         }
 
         fetch(`/avaliacoes/enviar/${sessionStorage.getItem('ID_ANIMACAO')}/usuario/${sessionStorage.getItem('ID_USUARIO')}`, {
