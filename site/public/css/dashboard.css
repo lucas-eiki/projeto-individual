@@ -214,6 +214,7 @@ header nav {
     justify-content: space-between;
     gap: 96px;
     width: 100%;
+    margin-bottom: 64px;
 }
 
 #animacao-container .animacao-info-container {
@@ -285,4 +286,80 @@ header nav {
 #animacao-container .imagem-animacao {
     width: 456px;
     height: 684px;
+}
+
+
+
+.avaliacoes-container-info {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.avaliacoes-container-info button {
+    background-color: var(--secundario);
+    color: var(--color-claro);
+    padding: 8px 16px;
+    font-size: 1.5rem;
+    border-radius: 8px;
+    width: fit-content;
+    cursor: pointer;
+    transition: .15s ease-in-out;
+}
+
+.avaliacoes-container-info button:hover{
+    background-color: var(--primario);
+    color: #ddd;
+}
+
+.avaliacoes-container-info .btn-cancelar {
+    background-color: var(--color-meio-claro);
+    color: var(--color-escuro);
+}
+
+.avaliacoes-container-info .btn-cancelar:hover {
+    background-color: var(--color-meio-escuro);
+}
+
+.btn-avalie {
+    display: none;
+}
+
+.btn-avalie.aberto {
+    display: flex;
+}
+
+.avaliar {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.avaliar.aberto {
+    display: flex;
+}
+
+.notas-container {
+    display: flex;
+    gap: 8px;
+}
+
+.notas-container input {
+    display: none;
+}
+
+.estrela {
+    width: 36px;
+    height: 36px;
+}
+
+.avaliar textarea {
+    resize: none;
+    width: 100%;
+    background-color: var(--color-claro);
+    font-size: 1.25rem;
+    padding: 16px 12px 64px 12px;
+    font-family: 'Inter', sans-serif;
+    border-radius: 8px;
+    border: none;
 }

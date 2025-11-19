@@ -15,9 +15,10 @@ var HOST_APP = process.env.APP_HOST;
 
 var app = express();
 
-var indexRouter = require("./src/routes/index")
+var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var animacoesRouter = require("./src/routes/animacoes");
+var avaliacoesRouter = require("./src/routes/avaliacoes");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -28,6 +29,7 @@ app.use(cors());
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/animacoes", animacoesRouter);
+app.use("/avaliacoes", avaliacoesRouter);
 
 
 app.listen(PORTA_APP, function () {

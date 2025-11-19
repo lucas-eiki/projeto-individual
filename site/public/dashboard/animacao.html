@@ -41,6 +41,45 @@
     <main class="main-animacao">
         <a href="./animacoes.html">Voltar</a>
         <div id="animacao-container"></div>
+        <div id="avaliacoes-container">
+            <div class="avaliacoes-container-info">
+                <h2>Avaliações</h2>
+                <button id="btn-avalie" class="btn-avalie aberto" onclick="mostrarAvaliar()">Avalie</button>
+                <div id="avaliar" class="avaliar">
+                    <div class="notas-container">
+                        <label onclick="atualizarEstrelas()" for="estrela1"><img id="img-estrela1" class="estrela"
+                                src="../assets/images/icons/estrela-cinza.png" alt="estrela 1"></label>
+                        <input value="1" name="estrela" type="radio" id="estrela1">
+
+                        <label onclick="atualizarEstrelas()" for="estrela2"><img id="img-estrela2" class="estrela"
+                                src="../assets/images/icons/estrela-cinza.png" alt="estrela 2"></label>
+                        <input value="2" name="estrela" type="radio" id="estrela2">
+
+                        <label onclick="atualizarEstrelas()" for="estrela3"><img id="img-estrela3" class="estrela"
+                                src="../assets/images/icons/estrela-cinza.png" alt="estrela 3"></label>
+                        <input value="3" name="estrela" type="radio" id="estrela3">
+
+                        <label onclick="atualizarEstrelas()" for="estrela4"><img id="img-estrela4" class="estrela"
+                                src="../assets/images/icons/estrela-cinza.png" alt="estrela 4"></label>
+                        <input value="4" name="estrela" type="radio" id="estrela4">
+
+                        <label onclick="atualizarEstrelas()" for="estrela5"><img id="img-estrela5" class="estrela"
+                                src="../assets/images/icons/estrela-cinza.png" alt="estrela 5"></label>
+                        <input value="5" name="estrela" type="radio" id="estrela5">
+                    </div>
+                    <textarea name="comentario-avaliacao" id="comentario-avaliacao" maxlength="1000"
+                        placeholder="Comentário"></textarea>
+                    <div class="buttons-container">
+                        <button class="btn-cancelar" onclick="cancelarAvaliacao()">Cancelar</button>
+                        <button onclick="enviarAvaliacao()">Enviar</button>
+                    </div>
+                </div>
+                <ul id="lista-comentarios"></ul>
+            </div>
+            <div class="grafico-avaliacoes">
+                <canvas id="grafico-avaliacoes"></canvas>
+            </div>
+        </div>
     </main>
 
     <footer>
@@ -74,7 +113,7 @@
 
 <script>
     const animacaoContainer = document.getElementById('animacao-container');
-    const avaliacoesContainer = document.getElementById('avaliacoes-container');
+    let ul_lista_comentarios = document.getElementById('lista-comentarios')
 
     function exibirAnimacao() {
 
@@ -109,7 +148,7 @@
                             <div class="avaliacao-container">
                                 <div class="nota-container">
                                     <img src="../assets/images/icons/estrela.png" alt="ícone de estrela">
-                                    <p class="p-nota"><span id="media_nota">${(animacao.media_nota == null ? '0' : animacao.media_nota)}</span>/5</p>
+                                    <p class="p-nota"><span id="media_nota">${(animacao.media_nota == null ? '0' : Number(animacao.media_nota).toFixed(1) * 1)}</span>/5</p>
                                 </div>
                                 <p class="p-numero-avaliacoes">(<span id="numero-avaliacoes">${animacao.qtd_avaliacoes}</span> avaliações)</p>
                             </div>
@@ -127,5 +166,111 @@
         }).catch(function (resposta) {
             console.error(resposta)
         })
+
+        fetch(`/avaliacoes/listar/${sessionStorage.getItem("ID_ANIMACAO")}`).then(function (resposta) {
+            if (resposta.ok) {
+
+                if (resposta.status == 204) {
+                    ul_lista_comentarios.innerHTML = `
+                        <p>Nenhuma avaliação encontrada...</p>
+                    `
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                console.log(resposta)
+
+                resposta.json().then(avaliacoes => {
+
+                    let indexAtual = 0;
+                    let numeroAvaliacoes = avaliacoes.length;
+
+                    while (indexAtual < numeroAvaliacoes) {
+                        let avaliacao = avaliacoes[indexAtual]
+                        if (avaliacao.comentario != null) {
+                            ul_lista_comentarios.innerHTML += `
+                                <li class="avaliacao-container">
+                                    <img src="${avaliacao.imagem_perfil}" alt="imagem de perfil">
+                                    <div class="comentario-container">
+                                        <div class="comentario-info">
+                                            <div class="avaliacao-info">
+                                                <div id="qtd-estrelas"></div>
+                                                <div class="data-avaliacao">${avaliacao.data}</div>
+                                            </div>
+                                            <span class="nome-usuario">${avaliacao.apelido}</span>
+                                        </div>
+                                        <p class="comentario">${avaliacao.comentario}</p>
+                                    </div> 
+                                </li>
+                            `
+                        }
+                        indexAtual++
+                    }
+                    if (ul_lista_comentarios.innerHTML == '') {
+                        ul_lista_comentarios.innerHTML = '<p>Nenhum comentário ainda...</p>'
+                    }
+                })
+            }
+            else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta)
+        })
+    }
+
+    let nota = 0
+
+    function atualizarEstrelas() {
+        let estrelasSelecionadas
+        setTimeout(() => {
+            estrelasSelecionadas = document.querySelector('input:checked').value
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById(`img-estrela${i}`).src = '../assets/images/icons/estrela-cinza.png'
+            }
+            for (let i = 1; i <= estrelasSelecionadas; i++) {
+                document.getElementById(`img-estrela${i}`).src = '../assets/images/icons/estrela.png'
+            }
+            nota = estrelasSelecionadas
+        }, 1)
+    }
+
+    function mostrarAvaliar() {
+        document.getElementById('avaliar').classList.add('aberto')
+        document.getElementById('btn-avalie').classList.remove('aberto')
+    }
+
+    function cancelarAvaliacao() {
+        document.getElementById('avaliar').classList.remove('aberto')
+        document.getElementById('btn-avalie').classList.add('aberto')
+    }
+
+    function enviarAvaliacao() {
+        document.getElementById('avaliar').classList.remove('aberto')
+
+        var corpo = {
+            nota: nota,
+            comentario: document.getElementById('comentario-avaliacao').value
+        }
+
+        fetch(`/avaliacoes/enviar/${sessionStorage.getItem('ID_ANIMACAO')}/usuario/${sessionStorage.getItem('ID_USUARIO')}`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(corpo)
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                window.alert("Post realizado com sucesso pelo usuario de ID: " + sessionStorage.getItem('ID_USUARIO') + "!");
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
     }
 </script>

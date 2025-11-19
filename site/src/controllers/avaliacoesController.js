@@ -1,0 +1,45 @@
+var avaliacoesModel = require("../models/avaliacoesModel");
+
+function listarPorId(req, res) {
+    const id = req.params.id
+
+    avaliacoesModel.listarPorId(id).then(
+        function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!");
+            }
+        }
+    )
+}
+
+function enviar(req, res) {
+    const id_animacao = req.params.id_animacao
+    const id_usuario = req.params.id_usuario
+    const nota = req.body.nota
+    const comentario = req.body.comentario
+
+    if (nota == undefined) {
+        res.status(400).send("A nota está indefinida!");
+    } else {
+        avaliacoesModel.enviar(id_animacao, id_usuario, nota, comentario)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            )
+            .catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+module.exports = {
+    listarPorId,
+    enviar
+};
