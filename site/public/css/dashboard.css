@@ -177,6 +177,7 @@ header nav {
     height: 468px;
     margin-bottom: 8px;
     object-fit: cover;
+    border-radius: 8px;
 }
 
 .animacao-container h2 {
