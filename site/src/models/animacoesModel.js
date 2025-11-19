@@ -8,7 +8,23 @@ function listar() {
 }
 
 function buscarPorId(id) {
-    var instrucaoSql = `SELECT titulo, sinopse, ano_lancamento, imagem, classificacao, categoria.nome AS categoria FROM animacao JOIN categoria ON animacao.id_categoria = categoria.id WHERE animacao.id = ${id}`;
+    var instrucaoSql = `
+        SELECT 
+            animacao.titulo titulo, 
+            animacao.sinopse sinopse, 
+            animacao.ano_lancamento ano_lancamento, 
+            animacao.imagem imagem, 
+            animacao.classificacao classificacao, 
+            categoria.nome AS categoria,
+            AVG(avaliacao.nota) media_nota,
+            COUNT(avaliacao.nota) qtd_avaliacoes
+        FROM animacao
+        LEFT JOIN categoria
+            ON animacao.id_categoria = categoria.id
+        LEFT JOIN avaliacao
+            ON animacao.id = avaliacao.id_animacao
+        WHERE animacao.id = ${id}
+    `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

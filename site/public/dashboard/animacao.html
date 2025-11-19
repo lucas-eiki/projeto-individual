@@ -73,7 +73,8 @@
 </html>
 
 <script>
-    const animationContainer = document.getElementById('animacao-container')
+    const animacaoContainer = document.getElementById('animacao-container');
+    const avaliacoesContainer = document.getElementById('avaliacoes-container');
 
     function exibirAnimacao() {
 
@@ -81,7 +82,7 @@
             if (resposta.ok) {
 
                 if (resposta.status == 204) {
-                    animationContainer.innerHTML = `
+                    animacaoContainer.innerHTML = `
                         <h1>Nenhuma animação encontrada...</h1>
                     `
                     throw "Nenhum resultado encontrado!!";
@@ -92,14 +93,14 @@
                 resposta.json().then(resposta => {
                     let animacao = resposta[0]
 
-                    animationContainer.innerHTML = `
+                    animacaoContainer.innerHTML = `
                         <div class="animacao-info-container">
                             <div class="titulo-container">
                                 <h1>${animacao.titulo}</h1>
                                 <ul class="detalhes">
                                     <li class="ano-lancamento">${animacao.ano_lancamento}</li>
                                     <li class="classificacao-indicativa"><img class="img-classificacao-indicativa" src="../assets/images/classificacao-indicativa/${animacao.classificacao}.png" alt="classificação indicativa"></li>
-                                    <li class="categoria">${animacao.categoria}</li>
+                                    <li class="categoria">${(animacao.categoria == null ? 'Sem categoria' : animacao.categoria)}</li>
                                 </ul>
                             </div>
                             <ul id="generos-container">
@@ -108,9 +109,9 @@
                             <div class="avaliacao-container">
                                 <div class="nota-container">
                                     <img src="../assets/images/icons/estrela.png" alt="ícone de estrela">
-                                    <p class="p-nota"><span id="nota"></span>/5</p>
+                                    <p class="p-nota"><span id="media_nota">${(animacao.media_nota == null ? '0' : animacao.media_nota)}</span>/5</p>
                                 </div>
-                                <p class="p-numero-avaliacoes">(<span id="numero-avaliacoes"></span> avaliações)</p>
+                                <p class="p-numero-avaliacoes">(<span id="numero-avaliacoes">${animacao.qtd_avaliacoes}</span> avaliações)</p>
                             </div>
                             <p class="sinopse">${animacao.sinopse}</p>
                         </div>
