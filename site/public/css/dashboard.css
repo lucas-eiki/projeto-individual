@@ -290,10 +290,22 @@ header nav {
 
 
 
+#avaliacoes-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 128px;
+}
+
+#avaliacoes-container #grafico-avaliacoes {
+    width: 500px;
+    height: 500px;
+}
+
 .avaliacoes-container-info {
     display: flex;
     flex-direction: column;
     gap: 32px;
+    width: 100%;
 }
 
 .avaliacoes-container-info button {

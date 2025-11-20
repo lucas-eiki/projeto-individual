@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../css/dashboard.css">
 
     <script src="../js/sessao.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body onload="validarSessao(), exibirAnimacao(), buscarAvaliacao()">
@@ -188,7 +189,7 @@
                     while (indexAtual < numeroAvaliacoes) {
                         let avaliacao = avaliacoes[indexAtual]
                         if (avaliacao.comentario.trim() != '' && avaliacao.id_usuario != sessionStorage.getItem('ID_USUARIO')) {
-                            
+
                             let estrelas = ''
                             for (let i = 0; i < 5; i++) {
                                 if (avaliacao.nota > i) {
@@ -339,4 +340,30 @@
             console.error(resposta)
         })
     }
+
+
+
+    const ctx = document.getElementById('grafico-avaliacoes');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [5, 4, 3, 2, 1],
+            datasets: [{
+                label: 'Quantidade de avaliações',
+                data: [12, 19, 3, 5, 2],
+                borderWidth: 1,
+                backgroundColor: '#EAAB39',
+                borderRadius: 8
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            indexAxis: 'y'
+        }
+    });
 </script>
