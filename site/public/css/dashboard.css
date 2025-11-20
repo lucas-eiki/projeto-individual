@@ -380,6 +380,8 @@ header nav {
 .li-avaliacao-container .imagem-perfil {
     width: 75px;
     height: 75px;
+    border: 2px solid var(--color-claro);
+    border-radius: 100px;
 }
 
 .li-avaliacao-container .comentario-container {
