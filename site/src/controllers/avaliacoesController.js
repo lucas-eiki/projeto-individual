@@ -14,6 +14,21 @@ function listarPorId(req, res) {
     )
 }
 
+function buscarPorUsuario(req, res) {
+    const id_animacao = req.params.id_animacao
+    const id_usuario = req.params.id_usuario
+
+    avaliacoesModel.buscarPorUsuario(id_animacao, id_usuario).then(
+        function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!");
+            }
+        }
+    )
+}
+
 function enviar(req, res) {
     const id_animacao = req.params.id_animacao
     const id_usuario = req.params.id_usuario
@@ -42,5 +57,6 @@ function enviar(req, res) {
 
 module.exports = {
     listarPorId,
+    buscarPorUsuario,
     enviar
 };
