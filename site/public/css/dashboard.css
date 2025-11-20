@@ -367,12 +367,11 @@ header nav {
 .li-avaliacao-container {
     display: flex;
     gap: 16px;
-    align-items: center;
 }
 
 .li-avaliacao-container .imagem-perfil {
-    width: 100px;
-    height: 100px;
+    width: 75px;
+    height: 75px;
 }
 
 .li-avaliacao-container .comentario-container {
@@ -394,14 +393,14 @@ header nav {
 
 .avaliacao-info .data-avaliacao {
     color: var(--color-meio-escuro);
-    font-size: 1.5rem;
+    font-size: 1.25rem;
 }
 
 .nome-usuario {
     color: var(--color-meio-escuro);
-    font-size: 1.5rem;
+    font-size: 1.25rem;
 }
 
 .comentario {
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
