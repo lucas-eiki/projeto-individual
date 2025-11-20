@@ -364,6 +364,14 @@ header nav {
     border: none;
 }
 
+
+
+#lista-comentarios {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
 .li-avaliacao-container {
     display: flex;
     gap: 16px;
