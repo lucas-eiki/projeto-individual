@@ -189,14 +189,14 @@
                         if (avaliacao.comentario != null) {
                             ul_lista_comentarios.innerHTML += `
                                 <li class="avaliacao-container">
-                                    <img src="${avaliacao.imagem_perfil}" alt="imagem de perfil">
+                                    <img src="${(avaliacao.imagem_perfil == null ? '../assets/avatar/avatar-generico.jpg' : avaliacao.imagem_perfil)}" alt="imagem de perfil">
                                     <div class="comentario-container">
                                         <div class="comentario-info">
                                             <div class="avaliacao-info">
                                                 <div id="qtd-estrelas"></div>
                                                 <div class="data-avaliacao">${avaliacao.data_avaliacao}</div>
                                             </div>
-                                            <span class="nome-usuario">${avaliacao.apelido}</span>
+                                            <span class="nome-usuario">${avaliacao.apelido == null ? avaliacao.nome : avaliacao.apelido}</span>
                                         </div>
                                         <p class="comentario">${avaliacao.comentario}</p>
                                     </div> 

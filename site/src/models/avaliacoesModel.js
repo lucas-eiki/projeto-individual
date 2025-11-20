@@ -3,6 +3,7 @@ var database = require("../database/config");
 function listarPorId(id) {
     var instrucaoSql = `
     SELECT
+        usuario.nome nome,
         usuario.apelido apelido,
         usuario.imagem_perfil imagem_perfil,
         avaliacao.nota nota,
