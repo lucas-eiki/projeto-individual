@@ -188,8 +188,8 @@
                         let avaliacao = avaliacoes[indexAtual]
                         if (avaliacao.comentario != null) {
                             ul_lista_comentarios.innerHTML += `
-                                <li class="avaliacao-container">
-                                    <img src="${(avaliacao.imagem_perfil == null ? '../assets/avatar/avatar-generico.jpg' : avaliacao.imagem_perfil)}" alt="imagem de perfil">
+                                <li class="li-avaliacao-container">
+                                    <img class="imagem-perfil" src="${(avaliacao.imagem_perfil == null ? '../assets/avatar/avatar-generico.jpg' : avaliacao.imagem_perfil)}" alt="imagem de perfil">
                                     <div class="comentario-container">
                                         <div class="comentario-info">
                                             <div class="avaliacao-info">

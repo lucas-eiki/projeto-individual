@@ -363,3 +363,40 @@ header nav {
     border-radius: 8px;
     border: none;
 }
+
+.li-avaliacao-container {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.li-avaliacao-container .imagem-perfil {
+    width: 100px;
+    height: 100px;
+}
+
+.li-avaliacao-container .comentario-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.avaliacao-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.avaliacao-info .data-avaliacao {
+    color: var(--color-meio-escuro);
+    font-size: 1.5rem;
+}
+
+.nome-usuario {
+    color: var(--color-meio-escuro);
+    font-size: 1.5rem;
+}
+
+.comentario {
+    font-size: 2rem;
+}
