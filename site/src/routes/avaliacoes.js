@@ -11,6 +11,10 @@ router.get("/buscar/:id_animacao/usuario/:id_usuario", function (req, res) {
     avaliacoesController.buscarPorUsuario(req, res);
 });
 
+router.get('/obter/:id_animacao', function(req, res) {
+    avaliacoesController.obterPorId(req, res)
+})
+
 router.post("/enviar/:id_animacao/usuario/:id_usuario", function (req, res) {
     avaliacoesController.enviar(req, res);
 })

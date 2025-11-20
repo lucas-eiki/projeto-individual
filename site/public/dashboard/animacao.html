@@ -14,7 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body onload="validarSessao(), exibirAnimacao(), buscarAvaliacao()">
+<body onload="validarSessao(), exibirAnimacao(), buscarAvaliacao(), obterDados(sessionStorage.getItem('ID_ANIMACAO'))">
     <header>
         <img class="logo-animotion" src="../assets/images/animotion-logo.png" alt="logo animotion">
 
@@ -343,27 +343,47 @@
 
 
 
-    const ctx = document.getElementById('grafico-avaliacoes');
+    function obterDados(id_animacao) {
+        fetch(`/avaliacoes/obter/${id_animacao}`)
+            .then(function (resposta) {
 
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: [5, 4, 3, 2, 1],
-            datasets: [{
-                label: 'Quantidade de avaliações',
-                data: [12, 19, 3, 5, 2],
-                borderWidth: 1,
-                backgroundColor: '#EAAB39',
-                borderRadius: 8
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
+                resposta.json().then(function (resposta) {
+                    const qtdNotas = resposta[0]
+
+                    const vt_notas = []
+
+                    for (let i = 5; i > 0; i--) {
+                        vt_notas.push(qtdNotas[`nota${i}`])
+                    }
+
+                    plotarGrafico(vt_notas)
+                })
+            })
+    }
+
+    function plotarGrafico(vt_notas) {
+        const ctx = document.getElementById('grafico-avaliacoes');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [5, 4, 3, 2, 1],
+                datasets: [{
+                    label: 'Quantidade de avaliações',
+                    data: vt_notas,
+                    borderWidth: 1,
+                    backgroundColor: '#EAAB39',
+                    borderRadius: 8
+                }]
             },
-            indexAxis: 'y'
-        }
-    });
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                indexAxis: 'y'
+            }
+        });
+    }
 </script>

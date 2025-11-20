@@ -43,6 +43,23 @@ function buscarPorUsuario(id_animacao, id_usuario) {
     return database.executar(instrucaoSql);
 }
 
+function obterPorId(id_animacao) {
+    var instrucaoSql = `
+    SELECT
+        (SELECT COUNT(nota) FROM avaliacao WHERE id_animacao = ${id_animacao} AND nota = 5) nota5,
+        (SELECT COUNT(nota) FROM avaliacao WHERE id_animacao = ${id_animacao} AND nota = 4) nota4,
+        (SELECT COUNT(nota) FROM avaliacao WHERE id_animacao = ${id_animacao} AND nota = 3) nota3,
+        (SELECT COUNT(nota) FROM avaliacao WHERE id_animacao = ${id_animacao} AND nota = 2) nota2,
+        (SELECT COUNT(nota) FROM avaliacao WHERE id_animacao = ${id_animacao} AND nota = 1) nota1
+    FROM avaliacao
+    WHERE id_animacao = ${id_animacao}
+    GROUP BY id_animacao;
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 function enviar(id_animacao, id_usuario, nota, comentario, data_avaliacao) {
     let comentarioAvaliacao = comentario == '' ? null : `'${comentario}'`
 
@@ -53,4 +70,4 @@ function enviar(id_animacao, id_usuario, nota, comentario, data_avaliacao) {
     return database.executar(instrucaoSql);
 }
 
-module.exports = { listarPorId, buscarPorUsuario, enviar };
+module.exports = { listarPorId, buscarPorUsuario, obterPorId, enviar };
