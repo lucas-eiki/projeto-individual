@@ -387,6 +387,11 @@ header nav {
     gap: 16px;
 }
 
+.avaliacao-info .qtd-estrelas .img-estrela {
+    width: 24px;
+    height: 24px;
+}
+
 .avaliacao-info .data-avaliacao {
     color: var(--color-meio-escuro);
     font-size: 1.5rem;

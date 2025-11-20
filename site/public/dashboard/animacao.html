@@ -187,13 +187,23 @@
                     while (indexAtual < numeroAvaliacoes) {
                         let avaliacao = avaliacoes[indexAtual]
                         if (avaliacao.comentario != null) {
+
+                            let estrelas = ''
+                            for (let i = 0; i < 5; i++) {
+                                if (avaliacao.nota > i) {
+                                    estrelas += '<img class="img-estrela" src="../assets/images/icons/estrela.png" alt="estrela amarela">'
+                                } else {
+                                    estrelas += '<img class="img-estrela" src="../assets/images/icons/estrela-cinza.png" alt="estrela cinza">'
+                                }
+                            }
+
                             ul_lista_comentarios.innerHTML += `
                                 <li class="li-avaliacao-container">
                                     <img class="imagem-perfil" src="${(avaliacao.imagem_perfil == null ? '../assets/avatar/avatar-generico.jpg' : avaliacao.imagem_perfil)}" alt="imagem de perfil">
                                     <div class="comentario-container">
                                         <div class="comentario-info">
                                             <div class="avaliacao-info">
-                                                <div id="qtd-estrelas"></div>
+                                                <div class="qtd-estrelas">${estrelas}</div>
                                                 <div class="data-avaliacao">${avaliacao.data_avaliacao}</div>
                                             </div>
                                             <span class="nome-usuario">${avaliacao.apelido == null ? avaliacao.nome : avaliacao.apelido}</span>
