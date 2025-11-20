@@ -329,7 +329,7 @@
                                     </div>
                                     <span class="nome-usuario">${avaliacao.apelido == null ? avaliacao.nome : avaliacao.apelido}</span>
                                 </div>
-                                <p class="comentario">${avaliacao.comentario}</p>
+                            ${avaliacao.comentario == null ? '' : `<p class="comentario">${avaliacao.comentario}</p>`}
                             </div> 
                         `
                     })
