@@ -187,8 +187,8 @@
 
                     while (indexAtual < numeroAvaliacoes) {
                         let avaliacao = avaliacoes[indexAtual]
-                        if (avaliacao.comentario != null && avaliacao.id_usuario != sessionStorage.getItem('ID_USUARIO')) {
-
+                        if (avaliacao.comentario.trim() != '' && avaliacao.id_usuario != sessionStorage.getItem('ID_USUARIO')) {
+                            
                             let estrelas = ''
                             for (let i = 0; i < 5; i++) {
                                 if (avaliacao.nota > i) {
@@ -218,8 +218,8 @@
                     }
                     setTimeout(() => {
                         if (ul_lista_comentarios.innerHTML == '' && document.getElementById('avaliacao-propria').innerHTML == '') {
-                        ul_lista_comentarios.innerHTML = '<p>Nenhum comentário ainda...</p>'
-                    }
+                            ul_lista_comentarios.innerHTML = '<p>Nenhum comentário ainda...</p>'
+                        }
                     }, 100)
                 })
             }
