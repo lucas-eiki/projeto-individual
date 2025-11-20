@@ -372,12 +372,13 @@ header nav {
     gap: 48px;
 }
 
+#avaliacao-propria,
 .li-avaliacao-container {
     display: flex;
     gap: 16px;
 }
 
-.li-avaliacao-container .imagem-perfil {
+.imagem-perfil {
     width: 75px;
     height: 75px;
     border: 2px solid var(--color-claro);

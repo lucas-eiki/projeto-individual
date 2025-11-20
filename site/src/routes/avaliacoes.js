@@ -3,7 +3,7 @@ var router = express.Router();
 
 var avaliacoesController = require("../controllers/avaliacoesController");
 
-router.get("/listar/:id", function (req, res) {
+router.get("/listar/:id_animacao/usuario/:id_usuario", function (req, res) {
     avaliacoesController.listarPorId(req, res);
 });
 

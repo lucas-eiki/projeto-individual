@@ -13,7 +13,7 @@
     <script src="../js/sessao.js"></script>
 </head>
 
-<body onload="validarSessao() ,exibirAnimacao()">
+<body onload="validarSessao(), exibirAnimacao(), buscarAvaliacao()">
     <header>
         <img class="logo-animotion" src="../assets/images/animotion-logo.png" alt="logo animotion">
 
@@ -44,7 +44,7 @@
         <div id="avaliacoes-container">
             <div class="avaliacoes-container-info">
                 <h2>Avaliações</h2>
-                <button id="btn-avalie" class="btn-avalie aberto" onclick="mostrarAvaliar()">Avalie</button>
+                <button id="btn-avalie" class="btn-avalie" onclick="mostrarAvaliar()">Avalie</button>
                 <div id="avaliar" class="avaliar">
                     <div class="notas-container">
                         <label onclick="atualizarEstrelas()" for="estrela1"><img id="img-estrela1" class="estrela"
@@ -74,6 +74,7 @@
                         <button onclick="enviarAvaliacao()">Enviar</button>
                     </div>
                 </div>
+                <div id="avaliacao-propria"></div>
                 <ul id="lista-comentarios"></ul>
             </div>
             <div class="grafico-avaliacoes">
@@ -167,7 +168,7 @@
             console.error(resposta)
         })
 
-        fetch(`/avaliacoes/listar/${sessionStorage.getItem("ID_ANIMACAO")}`).then(function (resposta) {
+        fetch(`/avaliacoes/listar/${sessionStorage.getItem("ID_ANIMACAO")}/usuario/${sessionStorage.getItem('ID_USUARIO')}`).then(function (resposta) {
             if (resposta.ok) {
 
                 if (resposta.status == 204) {
@@ -290,5 +291,50 @@
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
         });
+    }
+
+    function buscarAvaliacao() {
+        fetch(`/avaliacoes/buscar/${sessionStorage.getItem("ID_ANIMACAO")}/usuario/${sessionStorage.getItem('ID_USUARIO')}`).then(function (resposta) {
+            if (resposta.ok) {
+
+                if (resposta.status == 204) {
+                    document.getElementById('btn-avalie').classList.add('aberto')
+
+                    throw "Nenhum resultado encontrado!!";
+                } else {
+                    document.getElementById('btn-avalie').classList.remove('aberto')
+
+                    resposta.json().then(avaliacoes => {
+                        let avaliacao = avaliacoes[0]
+
+                        console.log(avaliacao);
+                        let estrelas = ''
+                        for (let i = 0; i < 5; i++) {
+                            if (avaliacao.nota > i) {
+                                estrelas += '<img class="img-estrela" src="../assets/images/icons/estrela.png" alt="estrela amarela">'
+                            } else {
+                                estrelas += '<img class="img-estrela" src="../assets/images/icons/estrela-cinza.png" alt="estrela cinza">'
+                            }
+                        }
+
+                        document.getElementById('avaliacao-propria').innerHTML = `
+                            <img class="imagem-perfil" src="${(avaliacao.imagem_perfil == null ? '../assets/avatar/avatar-generico.jpg' : avaliacao.imagem_perfil)}" alt="imagem de perfil">
+                            <div class="comentario-container">
+                                <div class="comentario-info">
+                                    <div class="avaliacao-info">
+                                        <div class="qtd-estrelas">${estrelas}</div>
+                                        <div class="data-avaliacao">${avaliacao.data_avaliacao}</div>
+                                    </div>
+                                    <span class="nome-usuario">${avaliacao.apelido == null ? avaliacao.nome : avaliacao.apelido}</span>
+                                </div>
+                                <p class="comentario">${avaliacao.comentario}</p>
+                            </div> 
+                        `
+                    })
+                }
+            }
+        }).catch(function (resposta) {
+            console.error(resposta)
+        })
     }
 </script>
