@@ -168,7 +168,7 @@
             console.error(resposta)
         })
 
-        fetch(`/avaliacoes/listar/${sessionStorage.getItem("ID_ANIMACAO")}/usuario/${sessionStorage.getItem('ID_USUARIO')}`).then(function (resposta) {
+        fetch(`/avaliacoes/listar/${sessionStorage.getItem("ID_ANIMACAO")}`).then(function (resposta) {
             if (resposta.ok) {
 
                 if (resposta.status == 204) {
@@ -187,7 +187,7 @@
 
                     while (indexAtual < numeroAvaliacoes) {
                         let avaliacao = avaliacoes[indexAtual]
-                        if (avaliacao.comentario != null) {
+                        if (avaliacao.comentario != null && avaliacao.id_usuario != sessionStorage.getItem('ID_USUARIO')) {
 
                             let estrelas = ''
                             for (let i = 0; i < 5; i++) {
@@ -216,7 +216,7 @@
                         }
                         indexAtual++
                     }
-                    if (ul_lista_comentarios.innerHTML == '') {
+                    if (ul_lista_comentarios.innerHTML == '' ) {
                         ul_lista_comentarios.innerHTML = '<p>Nenhum comentário ainda...</p>'
                     }
                 })

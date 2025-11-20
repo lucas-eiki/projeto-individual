@@ -2,9 +2,8 @@ var avaliacoesModel = require("../models/avaliacoesModel");
 
 function listarPorId(req, res) {
     const id_animacao = req.params.id_animacao
-    const id_usuario = req.params.id_usuario
 
-    avaliacoesModel.listarPorId(id_animacao, id_usuario).then(
+    avaliacoesModel.listarPorId(id_animacao).then(
         function (resultado) {
             if (resultado.length > 0) {
                 res.status(200).json(resultado);

@@ -1,8 +1,9 @@
 var database = require("../database/config");
 
-function listarPorId(id_animacao, id_usuario) {
+function listarPorId(id_animacao) {
     var instrucaoSql = `
     SELECT
+        usuario.id id_usuario,
         usuario.nome nome,
         usuario.apelido apelido,
         usuario.imagem_perfil imagem_perfil,
@@ -14,7 +15,7 @@ function listarPorId(id_animacao, id_usuario) {
         ON animacao.id = avaliacao.id_animacao
     JOIN usuario
         ON usuario.id = avaliacao.id_usuario
-    WHERE animacao.id = ${id_animacao} AND usuario.id != ${id_usuario}
+    WHERE animacao.id = ${id_animacao}
     `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
