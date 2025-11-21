@@ -362,28 +362,36 @@
     }
 
     function plotarGrafico(vt_notas) {
-        const ctx = document.getElementById('grafico-avaliacoes');
 
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: [5, 4, 3, 2, 1],
-                datasets: [{
-                    label: 'Quantidade de avaliações',
-                    data: vt_notas,
-                    borderWidth: 1,
-                    backgroundColor: '#EAAB39',
-                    borderRadius: 8
-                }]
+        let data = {
+            labels: [5, 4, 3, 2, 1],
+            datasets: [{
+                label: 'Quantidade de avaliações',
+                data: vt_notas,
+                borderWidth: 1,
+                backgroundColor: '#EAAB39',
+                borderRadius: 8
+            }]
+        }
+
+        let options = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
             },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                },
-                indexAxis: 'y'
-            }
-        });
+            indexAxis: 'y'
+        }
+
+        let config = {
+            type: 'bar',
+            data,
+            options
+        }
+
+        let myChart = new Chart(
+            document.getElementById('grafico-avaliacoes'),
+            config
+        );
     }
 </script>
