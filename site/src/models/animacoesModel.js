@@ -30,4 +30,29 @@ function buscarPorId(id) {
     return database.executar(instrucaoSql);
 }
 
-module.exports = { listar, buscarPorId };
+function buscarTop1() {
+    var instrucaoSql = `
+    SELECT
+        id_animacao,
+        animacao.titulo,
+        AVG(nota) media,
+        COUNT(nota) numero_avaliacoes,
+        COUNT(comentario) numero_comentarios,
+        animacao.ano_lancamento,
+        animacao.imagem,
+        (SELECT AVG(nota) FROM avaliacao) media_geral,
+        (SELECT COUNT(nota) FROM avaliacao) numero_avaliacoes_total,
+        (SELECT COUNT(comentario) FROM avaliacao) numero_comentarios_total
+    FROM avaliacao
+    JOIN animacao
+        ON avaliacao.id_animacao = animacao.id
+    GROUP BY id_animacao
+    ORDER BY AVG(nota) DESC, COUNT(nota) DESC, COUNT(comentario) DESC
+    LIMIT 1;
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+module.exports = { listar, buscarPorId, buscarTop1 };

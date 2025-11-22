@@ -28,7 +28,23 @@ function buscarPorId(req, res) {
     )
 }
 
+function buscarTop1(req, res) {
+    console.log('entrou no buscar top 1 controller');
+    
+    animacoesModel.buscarTop1().then(
+        function (resultado) {
+            if(resultado.length > 0) {
+                res.status(200).json(resultado)
+            }
+            else {
+                res.status(204).send("Nenhum resultado encontrado")
+            }
+        }
+    )
+}
+
 module.exports = {
     listar,
-    buscarPorId
+    buscarPorId,
+    buscarTop1
 };

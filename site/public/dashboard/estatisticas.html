@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animotion</title>
+
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+
+    <script src="../js/sessao.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body onload="validarSessao(), buscarMelhorAnimacao()">
+    <header>
+        <img class="logo-animotion" src="../assets/images/animotion-logo.png" alt="logo animotion">
+
+        <nav>
+            <ul class="links">
+                <li><a href="./animacoes.html">Animações</a></li>
+                <li><a href="./estatisticas.html">Estatísticas</a></li>
+            </ul>
+            <div class="perfil-container">
+                <button onclick="toggleLinksPerfil()" class="btn-perfil-container">
+                    <img id="imagem-perfil" src="" alt="imagem de perfil">
+                    <div class="perfil-info-container">
+                        <span id="apelido-usuario">Apelido</span>
+                        <span id="email-usuario">E-mail</span>
+                    </div>
+                </button>
+                <div id="div-perfil-links" class="perfil-links-container">
+                    <a class="perfil-button perfil-link" href="./perfil.html">Perfil</a>
+                    <button onclick="finalizarSessao()" class="sair-button perfil-link">Sair</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-estatistica" id="main-estatistica">
+        <!-- <div class="melhor-animacao-container">
+            <div class="melhor-animacao">
+                <img src="" alt="imagem da animacao">
+                <div class="melhor-animacao-info">
+                    <div class="media-nota"></div>
+                    <div class="numero-avaliacoes"></div>
+                    <div class="ano-lancamento"></div>
+                    <div class="numero-comentarios"></div>
+                </div>
+            </div>
+            <div class="info-gerais-container">
+                <div class="kpis-animacoes-geral">
+                    <div class="media-geral-container">
+                        <h2>Média geral</h2>
+                        <span class="media-geral"></span>
+                    </div>
+                    <div class="numero-comentarios-geral-container">
+                        <h2>Nº comentários geral</h2>
+                        <span class="numero-comentarios-geral"></span>
+                    </div>
+                </div>
+                <div class="graficos-proporcao">
+                    <div class="proporcao-avaliacoes-container">
+                        <canvas id="proporcao-avaliacoes"></canvas>
+                    </div>
+                    <div class="proporcao-comentarios-container">
+                        <canvas id="proporcao-comentarios"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ranking-container">
+            <div class="ranking-avaliacoes-container">
+                <canvas id="ranking-avaliacoes"></canvas>
+            </div>
+            <div class="ranking-comentarios-container">
+                <canvas id="ranking-comentarios"></canvas>
+            </div>
+        </div> -->
+    </main>
+
+    <footer>
+        <img class="logo-animotion" src="../assets/images/animotion-logo.png" alt="logo animotion">
+        <p>Feito com carinho por Lucas Eiki Gushiken</p>
+        <div class="contatos">
+            <h3>Contatos</h3>
+            <div class="contatos-container">
+                <ul class="redes-sociais">
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/lucaseikigushiken/">
+                            <img src="../assets/images/icons/linkedin-icon.png" alt="logo do linkedin">
+                        </a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="https://github.com/lucas-eiki">
+                            <img src="../assets/images/icons/github-icon.png" alt="logo do github">
+                        </a>
+                    </li>
+                </ul>
+                <div class="email-container">
+                    <h4>E-mail:</h4>
+                    <p>lucas.gushiken@sptech.school</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
+
+<script>
+    function buscarMelhorAnimacao() {
+
+
+        fetch('/animacoes/buscar-top-1/').then(resposta => {
+
+            if (resposta.ok) {
+
+                resposta.json().then(array => {
+                    let animacao = array[0]
+
+                    document.getElementById('main-estatistica').innerHTML += `
+                        <div class="melhor-animacao-container">
+                            <div class="melhor-animacao">
+                                <img src="${animacao.imagem}" alt="imagem da animacao">
+                                <div class="melhor-animacao-info">
+                                    <div class="media-nota">${Number(animacao.media).toFixed(2) * 1}/5</div>
+                                    <div class="numero-avaliacoes">${animacao.numero_avaliacoes} avaliações</div>
+                                    <div class="ano-lancamento">${animacao.ano_lancamento}</div>
+                                    <div class="numero-comentarios">${animacao.numero_comentarios} comentários</div>
+                                </div>
+                            </div>
+                            <div class="info-gerais-container">
+                                <div class="kpis-animacoes-geral">
+                                    <div class="media-geral-container">
+                                        <h2>Média geral</h2>
+                                        <span class="media-geral">${animacao.media_geral}</span>
+                                    </div>
+                                    <div class="numero-comentarios-geral-container">
+                                        <h2>Nº comentários total</h2>
+                                        <span class="numero-comentarios-total">${animacao.numero_comentarios_total}</span>
+                                    </div>
+                                </div>
+                                <div class="graficos-proporcao">
+                                    <div class="proporcao-avaliacoes-container">
+                                        <canvas id="proporcao-avaliacoes"></canvas>
+                                    </div>
+                                    <div class="proporcao-comentarios-container">
+                                        <canvas id="proporcao-comentarios"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ranking-container">
+                            <div class="ranking-avaliacoes-container">
+                                <canvas id="ranking-avaliacoes"></canvas>
+                            </div>
+                            <div class="ranking-comentarios-container">
+                                <canvas id="ranking-comentarios"></canvas>
+                            </div>
+                        </div>
+                    `
+
+                    let porcentagemNumeroAvaliacoes = (animacao.numero_avaliacoes / animacao.numero_avaliacoes_total * 100).toFixed(2) * 1
+                    let restoPorcentagem = 100 - porcentagemNumeroAvaliacoes
+
+                    let dadosProporcaoAvaliacoes = {
+                        labels: [`${animacao.titulo}`, 'Resto'],
+                        data: [porcentagemNumeroAvaliacoes, restoPorcentagem]
+                    }
+                    
+                    plotarGraficoProporcaoAvaliacoes(dadosProporcaoAvaliacoes)
+                })
+            } else {
+                console.log('Erro na busca de melhor animação');
+                throw 'Erro na busca de melhor animação'
+            }
+        }).catch(resposta => {
+            console.log(resposta);
+        })
+    }
+
+    function plotarGraficoProporcaoAvaliacoes(dados) {
+        let data = {
+            labels: dados.labels,
+            datasets: [{
+                label: 'Proporção de avaliações',
+                data: dados.data,
+                borderWidth: 1,
+                backgroundColor: '#EAAB39',
+                borderRadius: 8
+            }]
+        }
+
+        // let options = {
+        //     scales: {
+        //         y: {
+        //             beginAtZero: true
+        //         }
+        //     },
+        //     indexAxis: 'y'
+        // }
+
+        let config = {
+            type: 'pie',
+            data
+            // options
+        }
+
+        let myChart = new Chart(
+            document.getElementById('proporcao-avaliacoes'),
+            config
+        );
+    }
+</script>
