@@ -2,6 +2,14 @@ header nav {
     gap: 64px;
 }
 
+.links li a.selecionado {
+    color: var(--terciario);
+}
+
+.links li a:hover {
+    text-decoration: underline;
+}
+
 .perfil-container {
     position: relative;
 }
@@ -87,7 +95,6 @@ header nav {
     align-items: center;
     gap: 8px;
 }
-
 
 .perfil-button::before {
     content: url(../assets/images/icons/config.svg);
