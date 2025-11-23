@@ -408,7 +408,7 @@
                     resposta.json().then(array => {
 
                         array.forEach(genero => {
-                            ul_lista_generos += `<li><span>${genero.nome}</span></li>`
+                            ul_lista_generos.innerHTML += `<li><span>${genero.nome}</span></li>`
                         });
                     })
                 }
