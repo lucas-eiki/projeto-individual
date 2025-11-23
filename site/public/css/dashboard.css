@@ -503,7 +503,7 @@ header nav {
     gap: 4px;
 }
 
-.img-classificacao-indicativa {
+.classificacao-indicativa-container .img-classificacao-indicativa {
     width: 48px;
     height: 48px;
 }
