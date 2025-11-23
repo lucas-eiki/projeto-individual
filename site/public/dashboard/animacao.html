@@ -349,17 +349,26 @@
         fetch(`/avaliacoes/obter/${id_animacao}`)
             .then(function (resposta) {
 
-                resposta.json().then(function (resposta) {
-                    const qtdNotas = resposta[0]
-
-                    const vt_notas = []
-
-                    for (let i = 5; i > 0; i--) {
-                        vt_notas.push(qtdNotas[`nota${i}`])
-                    }
-
+                if (resposta.status == 204) {
+                    const vt_notas = [0, 0, 0, 0, 0]
                     plotarGrafico(vt_notas, id_animacao)
-                })
+                } else {
+                    resposta.json().then(function (resposta) {
+                        const qtdNotas = resposta[0]
+
+                        const vt_notas = []
+
+                        for (let i = 5; i > 0; i--) {
+                            vt_notas.push(qtdNotas[`nota${i}`])
+                        }
+
+                        if (vt_notas == []) {
+                            vt_notas = [0, 0, 0, 0, 0]
+                        }
+
+                        plotarGrafico(vt_notas, id_animacao)
+                    })
+                }
             })
     }
 
@@ -409,22 +418,26 @@
         fetch(`/avaliacoes/obter/${id_animacao}`)
             .then(function (resposta) {
 
-                resposta.json().then(function (resposta) {
-                    const qtdNotas = resposta[0]
-
-                    const vt_notas = []
-
-                    for (let i = 5; i > 0; i--) {
-                        vt_notas.push(qtdNotas[`nota${i}`])
-                    }
-
-                    data.datasets[0].data = vt_notas
-                    console.log(myChart);
-                    
-                    myChart.update()
-
+                if (resposta.status == 204) {
                     setTimeout(() => atualizarGrafico(id_animacao, data), 2000)
-                })
+                }
+                else {
+                    resposta.json().then(function (resposta) {
+                        const qtdNotas = resposta[0]
+
+                        const vt_notas = []
+
+                        for (let i = 5; i > 0; i--) {
+                            vt_notas.push(qtdNotas[`nota${i}`])
+                        }
+
+                        data.datasets[0].data = vt_notas
+
+                        myChart.update()
+
+                        setTimeout(() => atualizarGrafico(id_animacao, data), 2000)
+                    })
+                }
             })
     }
 
