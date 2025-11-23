@@ -57,15 +57,16 @@
                     <p>Selecione uma taxa de quadros por segundo e observe a diferença entre elas:</p>
                     <div class="definicao-buttons">
                         <div class="fps-buttons">
-                            <button>12 FPS</button>
-                            <button>24 FPS</button>
+                            <button id="btn-12fps" onclick="selecionarFPS(12)">12 FPS</button>
+                            <button id="btn-24fps" onclick="selecionarFPS(24)">24 FPS</button>
                         </div>
-                        <button class="cta-button">Iniciar animação</button>
+                        <button id="btn-toggle-animacao" disabled onclick="toggleAnimacao()" class="cta-button">Iniciar
+                            animação</button>
                     </div>
                 </div>
             </div>
 
-            <img src="https://placehold.co/600x400/png" alt="frames">
+            <img id="img-frame" src="./assets/images/frames/12fps/frame-1.png" alt="frames">
         </section>
 
 
@@ -233,3 +234,70 @@
 </body>
 
 </html>
+
+<script>
+    let imgFrame = document.getElementById('img-frame')
+    let btn12fps = document.getElementById('btn-12fps')
+    let btn24fps = document.getElementById('btn-24fps')
+    let btnToggleAnimacao = document.getElementById('btn-toggle-animacao')
+    let taxaAtualizacao = 0
+    let fps
+    let isLooping = false
+
+    function selecionarFPS(fps_selecionado) {
+        let umSegundo = 1000
+
+        taxaAtualizacao = umSegundo / fps_selecionado
+        fps = fps_selecionado
+
+        if (fps == 12) {
+            btn12fps.classList.toggle('selecionado')
+            btn24fps.classList.remove('selecionado')
+        } else {
+            btn24fps.classList.toggle('selecionado')
+            btn12fps.classList.remove('selecionado')
+        }
+
+        if (
+            btn12fps.classList.contains('selecionado') ||
+            btn24fps.classList.contains('selecionado')
+        ) {
+            btnToggleAnimacao.removeAttribute('disabled', '')
+        } else {
+            btnToggleAnimacao.setAttribute('disabled', '')
+        }
+    }
+
+    let loopFrames
+
+    function toggleAnimacao() {
+        let frame = 0
+        let qtdFrames = fps == 12 ? 16 : 32
+
+        if (!isLooping) {
+            isLooping = true
+
+            loopFrames = setInterval(() => {
+                frame++
+                if (frame > qtdFrames) {
+                    frame = 1
+                }
+
+                imgFrame.src = `./assets/images/frames/${fps}fps/frame-${frame}.png`
+            }, taxaAtualizacao)
+
+            btn12fps.setAttribute('disabled', '')
+            btn24fps.setAttribute('disabled', '')
+            btnToggleAnimacao.classList.add('animando')
+            btnToggleAnimacao.innerHTML = "Parar animação"
+        }
+        else {
+            isLooping = false
+            clearInterval(loopFrames)
+            btn12fps.removeAttribute('disabled', '')
+            btn24fps.removeAttribute('disabled', '')
+            btnToggleAnimacao.classList.remove('animando')
+            btnToggleAnimacao.innerHTML = "Iniciar animação"
+        }
+    }
+</script>
