@@ -324,7 +324,12 @@
                             }
                         }
 
-                        ul_lista_comentarios.innerHTML = ''
+                        if (
+                            ul_lista_comentarios.innerHTML == '<p>Nenhum comentário ainda...</p>'||
+                            ul_lista_comentarios.innerHTML == '<p>Nenhuma avaliação encontrada...</p>'
+                        ) {
+                            ul_lista_comentarios.innerHTML = ''
+                        }
 
                         document.getElementById('avaliacao-propria').innerHTML = `
                             <img class="imagem-perfil" src="${(avaliacao.imagem_perfil == null ? '../assets/avatar/avatar-generico.jpg' : avaliacao.imagem_perfil)}" alt="imagem de perfil">
