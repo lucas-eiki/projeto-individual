@@ -144,9 +144,7 @@
                                     <li class="categoria">${(animacao.categoria == null ? 'Sem categoria' : animacao.categoria)}</li>
                                 </ul>
                             </div>
-                            <ul id="generos-container">
-                                <li>genero</li>
-                            </ul>
+                            <ul id="generos-container"></ul>
                             <div class="avaliacao-container">
                                 <div class="nota-container">
                                     <img src="../assets/images/icons/estrela.png" alt="ícone de estrela">
@@ -160,6 +158,8 @@
                     
                         <img class="imagem-animacao" src="${animacao.imagem}" alt="Imagem da animação">
                     `
+
+                    obterGeneros(sessionStorage.getItem('ID_ANIMACAO'))
                 })
             }
             else {
@@ -393,5 +393,28 @@
             document.getElementById('grafico-avaliacoes'),
             config
         );
+    }
+
+    function obterGeneros(id_animacao) {
+        let ul_lista_generos = document.getElementById('generos-container')
+
+        fetch(`/generos/buscar/${id_animacao}`)
+        .then(function (resposta) {
+            if(resposta.ok) {
+
+                if(resposta.status == 204) {
+                    ul_lista_generos.innerHTML = '<li><span>Nenhum gênero registrado</span></li>'
+                } else {
+                    resposta.json().then(array => {
+
+                        array.forEach(genero => {
+                            ul_lista_generos += `<li><span>${genero.nome}</span></li>`
+                        });
+                    })
+                }
+            }
+        }).catch(erro => {
+            console.log("Ocorreu um erro ao obter gêneros", erro);
+        })
     }
 </script>
