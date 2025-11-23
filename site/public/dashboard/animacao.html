@@ -186,6 +186,8 @@
                     let indexAtual = 0;
                     let numeroAvaliacoes = avaliacoes.length;
 
+                    ul_lista_comentarios.innerHTML = ''
+
                     while (indexAtual < numeroAvaliacoes) {
                         let avaliacao = avaliacoes[indexAtual]
                         if (avaliacao.comentario != null && avaliacao.id_usuario != sessionStorage.getItem('ID_USUARIO')) {
@@ -321,6 +323,8 @@
                                 estrelas += '<img class="img-estrela" src="../assets/images/icons/estrela-cinza.png" alt="estrela cinza">'
                             }
                         }
+
+                        ul_lista_comentarios.innerHTML = ''
 
                         document.getElementById('avaliacao-propria').innerHTML = `
                             <img class="imagem-perfil" src="${(avaliacao.imagem_perfil == null ? '../assets/avatar/avatar-generico.jpg' : avaliacao.imagem_perfil)}" alt="imagem de perfil">
