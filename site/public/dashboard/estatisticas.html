@@ -80,12 +80,13 @@
 
                 resposta.json().then(array => {
                     let animacao = array[0]
+                    let imagem = animacao.imagem == null ? 'https://placehold.co/312x468?text=Imagem+não+encontrada' : animacao.imagem
 
                     document.getElementById('main-estatistica').innerHTML += `
                         <h1>Melhor animação do momento</h1>
                         <div class="melhor-animacao-container">
                             <div class="melhor-animacao">
-                                <img class="img-melhor-animacao" src="${animacao.imagem}" alt="imagem da animacao">
+                                <img class="img-melhor-animacao" src="${imagem}" alt="imagem da animacao">
                                 <div class="melhor-animacao-info">
                                     <h2>${animacao.titulo}</h2>
                                     <div class="media-container">

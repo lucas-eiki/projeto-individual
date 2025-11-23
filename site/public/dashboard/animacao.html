@@ -133,6 +133,7 @@
 
                 resposta.json().then(resposta => {
                     let animacao = resposta[0]
+                    let imagem = animacao.imagem == null ? 'https://placehold.co/312x468?text=Imagem+não+encontrada' : animacao.imagem
 
                     animacaoContainer.innerHTML = `
                         <div class="animacao-info-container">
@@ -156,7 +157,7 @@
                         </div>
 
                     
-                        <img class="imagem-animacao" src="${animacao.imagem}" alt="Imagem da animação">
+                        <img class="imagem-animacao" src="${imagem}" alt="Imagem da animação">
                     `
 
                     obterGeneros(sessionStorage.getItem('ID_ANIMACAO'))
