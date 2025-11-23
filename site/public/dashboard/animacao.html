@@ -287,6 +287,7 @@
             if (resposta.ok) {
                 window.alert("Post realizado com sucesso pelo usuario de ID: " + sessionStorage.getItem('ID_USUARIO') + "!");
                 obterDados(sessionStorage.getItem('ID_ANIMACAO'))
+                buscarAvaliacao()
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
             } else {
