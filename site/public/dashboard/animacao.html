@@ -261,43 +261,47 @@
     }
 
     function enviarAvaliacao() {
-        document.getElementById('avaliar').classList.remove('aberto')
+        if (nota != 0) {
+            document.getElementById('avaliar').classList.remove('aberto')
 
-        const dataAtual = new Date()
+            const dataAtual = new Date()
 
-        let dataBrasil = dataAtual.toLocaleDateString('pt-br')
+            let dataBrasil = dataAtual.toLocaleDateString('pt-br')
 
-        const [dia, mes, ano] = dataBrasil.split('/');
-        const dataFormatada = `${ano}-${mes}-${dia}`;
+            const [dia, mes, ano] = dataBrasil.split('/');
+            const dataFormatada = `${ano}-${mes}-${dia}`;
 
-        var corpo = {
-            nota: nota,
-            comentario: document.getElementById('comentario-avaliacao').value,
-            data_avaliacao: dataFormatada
-        }
-
-        fetch(`/avaliacoes/enviar/${sessionStorage.getItem('ID_ANIMACAO')}/usuario/${sessionStorage.getItem('ID_USUARIO')}`, {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(corpo)
-        }).then(function (resposta) {
-
-            console.log("resposta: ", resposta);
-
-            if (resposta.ok) {
-                window.alert("Post realizado com sucesso pelo usuario de ID: " + sessionStorage.getItem('ID_USUARIO') + "!");
-                obterDados(sessionStorage.getItem('ID_ANIMACAO'))
-                buscarAvaliacao()
-            } else if (resposta.status == 404) {
-                window.alert("Deu 404!");
-            } else {
-                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            var corpo = {
+                nota: nota,
+                comentario: document.getElementById('comentario-avaliacao').value,
+                data_avaliacao: dataFormatada
             }
-        }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-        });
+
+            fetch(`/avaliacoes/enviar/${sessionStorage.getItem('ID_ANIMACAO')}/usuario/${sessionStorage.getItem('ID_USUARIO')}`, {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(corpo)
+            }).then(function (resposta) {
+
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    window.alert("Post realizado com sucesso pelo usuario de ID: " + sessionStorage.getItem('ID_USUARIO') + "!");
+                    obterDados(sessionStorage.getItem('ID_ANIMACAO'))
+                    buscarAvaliacao()
+                } else if (resposta.status == 404) {
+                    window.alert("Deu 404!");
+                } else {
+                    throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+        } else {
+            alert('Insira uma nota entre 1 e 5 estrelas')
+        }
     }
 
     function buscarAvaliacao() {
@@ -325,7 +329,7 @@
                         }
 
                         if (
-                            ul_lista_comentarios.innerHTML == '<p>Nenhum comentário ainda...</p>'||
+                            ul_lista_comentarios.innerHTML == '<p>Nenhum comentário ainda...</p>' ||
                             ul_lista_comentarios.innerHTML == '<p>Nenhuma avaliação encontrada...</p>'
                         ) {
                             ul_lista_comentarios.innerHTML = ''
