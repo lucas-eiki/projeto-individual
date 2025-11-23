@@ -497,6 +497,12 @@ header nav {
     display: inline-block;
 }
 
+#lista-generos {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
 .img-classificacao-indicativa {
     width: 48px;
     height: 48px;

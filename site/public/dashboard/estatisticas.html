@@ -140,7 +140,7 @@
                         labels: [`${animacao.titulo}`, 'Resto'],
                         data: [porcentagemNumeroAvaliacoes, restoPorcentagem]
                     }
-
+                    obterGeneros(animacao.id_animacao)
                     plotarGraficoProporcaoAvaliacoes(dadosProporcaoAvaliacoes)
                 })
             } else {
@@ -174,5 +174,28 @@
             document.getElementById('proporcao-avaliacoes'),
             config
         );
+    }
+
+    function obterGeneros(id_animacao) {
+        let ul_lista_generos = document.getElementById('lista-generos')
+
+        fetch(`/generos/buscar/${id_animacao}`)
+        .then(function (resposta) {
+            if(resposta.ok) {
+
+                if(resposta.status == 204) {
+                    ul_lista_generos.innerHTML = '<li><span>Nenhum gênero registrado</span></li>'
+                } else {
+                    resposta.json().then(array => {
+
+                        array.forEach(genero => {
+                            ul_lista_generos += `<li><span>${genero.nome}</span></li>`
+                        });
+                    })
+                }
+            }
+        }).catch(erro => {
+            console.log("Ocorreu um erro ao obter gêneros", erro);
+        })
     }
 </script>
