@@ -166,9 +166,25 @@
             }]
         }
 
+        let options = {
+            plugins: {
+                tooltip: {
+                    titleFont: {
+                        size: 18,
+                        weight: 500
+                    },
+                    bodyFont: {
+                        size: 20,
+                        weight: 600
+                    }
+                }
+            }
+        }
+
         let config = {
             type: 'pie',
-            data
+            data,
+            options
         }
 
         let myChart = new Chart(
@@ -181,22 +197,22 @@
         let ul_lista_generos = document.getElementById('lista-generos')
 
         fetch(`/generos/buscar/${id_animacao}`)
-        .then(function (resposta) {
-            if(resposta.ok) {
+            .then(function (resposta) {
+                if (resposta.ok) {
 
-                if(resposta.status == 204) {
-                    ul_lista_generos.innerHTML = '<li><span>Nenhum gênero registrado</span></li>'
-                } else {
-                    resposta.json().then(array => {
+                    if (resposta.status == 204) {
+                        ul_lista_generos.innerHTML = '<li><span>Nenhum gênero registrado</span></li>'
+                    } else {
+                        resposta.json().then(array => {
 
-                        array.forEach(genero => {
-                            ul_lista_generos.innerHTML += `<li><span>${genero.nome}</span></li>`
-                        });
-                    })
+                            array.forEach(genero => {
+                                ul_lista_generos.innerHTML += `<li><span>${genero.nome}</span></li>`
+                            });
+                        })
+                    }
                 }
-            }
-        }).catch(erro => {
-            console.log("Ocorreu um erro ao obter gêneros", erro);
-        })
+            }).catch(erro => {
+                console.log("Ocorreu um erro ao obter gêneros", erro);
+            })
     }
 </script>
