@@ -293,6 +293,7 @@ header nav {
 #animacao-container .imagem-animacao {
     width: 456px;
     height: 684px;
+    border-radius: 8px;
 }
 
 
@@ -464,6 +465,7 @@ header nav {
 .melhor-animacao .img-melhor-animacao {
     width: 360px;
     height: 540px;
+    border-radius: 8px;
 }
 
 .melhor-animacao-info {
