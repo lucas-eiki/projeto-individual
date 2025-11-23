@@ -39,47 +39,7 @@
         </nav>
     </header>
 
-    <main class="main-estatistica" id="main-estatistica">
-        <!-- <div class="melhor-animacao-container">
-            <div class="melhor-animacao">
-                <img src="" alt="imagem da animacao">
-                <div class="melhor-animacao-info">
-                    <div class="media-nota"></div>
-                    <div class="numero-avaliacoes"></div>
-                    <div class="ano-lancamento"></div>
-                    <div class="numero-comentarios"></div>
-                </div>
-            </div>
-            <div class="info-gerais-container">
-                <div class="kpis-animacoes-geral">
-                    <div class="media-geral-container">
-                        <h2>Média geral</h2>
-                        <span class="media-geral"></span>
-                    </div>
-                    <div class="numero-comentarios-geral-container">
-                        <h2>Nº comentários geral</h2>
-                        <span class="numero-comentarios-geral"></span>
-                    </div>
-                </div>
-                <div class="graficos-proporcao">
-                    <div class="proporcao-avaliacoes-container">
-                        <canvas id="proporcao-avaliacoes"></canvas>
-                    </div>
-                    <div class="proporcao-comentarios-container">
-                        <canvas id="proporcao-comentarios"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="ranking-container">
-            <div class="ranking-avaliacoes-container">
-                <canvas id="ranking-avaliacoes"></canvas>
-            </div>
-            <div class="ranking-comentarios-container">
-                <canvas id="ranking-comentarios"></canvas>
-            </div>
-        </div> -->
-    </main>
+    <main class="main-estatistica" id="main-estatistica"></main>
 
     <footer>
         <img class="logo-animotion" src="../assets/images/animotion-logo.png" alt="logo animotion">
@@ -122,43 +82,53 @@
                     let animacao = array[0]
 
                     document.getElementById('main-estatistica').innerHTML += `
+                        <h1>Melhor animação do momento</h1>
                         <div class="melhor-animacao-container">
                             <div class="melhor-animacao">
-                                <img src="${animacao.imagem}" alt="imagem da animacao">
+                                <img class="img-melhor-animacao" src="${animacao.imagem}" alt="imagem da animacao">
                                 <div class="melhor-animacao-info">
-                                    <div class="media-nota">${Number(animacao.media).toFixed(2) * 1}/5</div>
-                                    <div class="numero-avaliacoes">${animacao.numero_avaliacoes} avaliações</div>
-                                    <div class="ano-lancamento">${animacao.ano_lancamento}</div>
-                                    <div class="numero-comentarios">${animacao.numero_comentarios} comentários</div>
+                                    <h2>${animacao.titulo}</h2>
+                                    <div class="media-container">
+                                        <h3>Nota média</h3>
+                                        <span class="media-nota">${Number(animacao.media).toFixed(2) * 1}/5</span>
+                                    </div>
+                                    <div class="qtd-avaliacoes-container">
+                                        <h3>Número de avaliações</h3>
+                                        <span class="numero-avaliacoes">${animacao.numero_avaliacoes} ${animacao.numero_avaliacoes > 1 ? 'avaliações' : 'avaliação'}</span>
+                                    </div>
+                                    <div class="qtd-comentarios-container">
+                                        <h3>Número de comentários</h3>
+                                        <span class="numero-comentarios">${animacao.numero_comentarios} ${animacao.numero_comentarios > 1 ? 'comentários' : 'comentário'}</span>
+                                    </div>
+                                    <div class="generos-container">
+                                        <h3>Gêneros</h3>
+                                        <ul id="lista-generos"></ul>
+                                    </div>
+                                    <div class="classificacao-indicativa-container">
+                                        <h3>Classificação indicativa</h3>
+                                        <img class="img-classificacao-indicativa" src="../assets/images/classificacao-indicativa/${animacao.classificacao}.png" alt="classificação indicativa">
+                                    </div>
+                                    <div class="ano-lancamento-container">
+                                        <h3>Ano de lançamento</h3>
+                                        <span class="ano-lancamento">${animacao.ano_lancamento}</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="info-gerais-container">
                                 <div class="kpis-animacoes-geral">
-                                    <div class="media-geral-container">
+                                    <div class="media-geral-container kpi-container">
                                         <h2>Média geral</h2>
-                                        <span class="media-geral">${animacao.media_geral}</span>
+                                        <span class="media-geral media-nota kpi">${Number(animacao.media_geral).toFixed(2) * 1} / 5</span>
                                     </div>
-                                    <div class="numero-comentarios-geral-container">
-                                        <h2>Nº comentários total</h2>
-                                        <span class="numero-comentarios-total">${animacao.numero_comentarios_total}</span>
-                                    </div>
-                                </div>
-                                <div class="graficos-proporcao">
-                                    <div class="proporcao-avaliacoes-container">
-                                        <canvas id="proporcao-avaliacoes"></canvas>
-                                    </div>
-                                    <div class="proporcao-comentarios-container">
-                                        <canvas id="proporcao-comentarios"></canvas>
+                                    <div class="numero-comentarios-geral-container kpi-container">
+                                        <h2>Nº total de avaliações</h2>
+                                        <span class="numero-comentarios-total kpi">${animacao.numero_comentarios_total}</span>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="ranking-container">
-                            <div class="ranking-avaliacoes-container">
-                                <canvas id="ranking-avaliacoes"></canvas>
-                            </div>
-                            <div class="ranking-comentarios-container">
-                                <canvas id="ranking-comentarios"></canvas>
+                                <div class="proporcao-avaliacoes-container">
+                                    <h2>Proporção em relação ao total de avaliações (%)</h2>
+                                    <canvas id="proporcao-avaliacoes"></canvas>
+                                </div>
                             </div>
                         </div>
                     `
@@ -170,7 +140,7 @@
                         labels: [`${animacao.titulo}`, 'Resto'],
                         data: [porcentagemNumeroAvaliacoes, restoPorcentagem]
                     }
-                    
+
                     plotarGraficoProporcaoAvaliacoes(dadosProporcaoAvaliacoes)
                 })
             } else {
@@ -186,27 +156,18 @@
         let data = {
             labels: dados.labels,
             datasets: [{
-                label: 'Proporção de avaliações',
+                label: 'Porcentagem (%)',
                 data: dados.data,
-                borderWidth: 1,
-                backgroundColor: '#EAAB39',
-                borderRadius: 8
+                backgroundColor: [
+                    '#EAAB39',
+                    '#2D61A6',
+                ],
             }]
         }
-
-        // let options = {
-        //     scales: {
-        //         y: {
-        //             beginAtZero: true
-        //         }
-        //     },
-        //     indexAxis: 'y'
-        // }
 
         let config = {
             type: 'pie',
             data
-            // options
         }
 
         let myChart = new Chart(

@@ -223,14 +223,14 @@ header nav {
     gap: 24px;
 }
 
-.animacao-info-container .titulo-container h1 {
+.titulo-container h1 {
     color: var(--escuro);
     font-size: var(--font-size-titulo-secao);
     font-weight: var(--font-weight-titulo-secao);
     margin-bottom: 8px;
 }
 
-.animacao-info-container .titulo-container .detalhes {
+.titulo-container .detalhes {
     display: flex;
     align-items: center;
     gap: 32px;
@@ -426,4 +426,132 @@ header nav {
 
 .comentario {
     font-size: 1.5rem;
+}
+
+
+
+.main-estatistica {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 64px 256px;
+}
+
+.main-estatistica h1 {
+    font-size: 3rem;
+    margin-bottom: 16px;
+}
+
+.melhor-animacao-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 128px;
+}
+
+.melhor-animacao {
+    display: flex;
+    gap: 32px;
+}
+
+.melhor-animacao .img-melhor-animacao {
+    width: 360px;
+    height: 540px;
+}
+
+.melhor-animacao-info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.melhor-animacao-info h2 {
+    font-size: 1.75rem;
+}
+
+.melhor-animacao-info h3 {
+    margin-bottom: 4px;
+    color: var(--color-escuro);
+}
+
+.melhor-animacao-info span {
+    color: var(--escuro);
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.melhor-animacao-info .media-nota {
+    font-weight: 600;
+    font-size: 2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.media-nota::before {
+    content: '';
+    background-image: url(../assets/images/icons/estrela.png);
+    background-size: contain;
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+}
+
+.img-classificacao-indicativa {
+    width: 48px;
+    height: 48px;
+}
+
+
+.info-gerais-container {
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.kpis-animacoes-geral {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.kpis-animacoes-geral .kpi-container {
+    border: 1px solid var(--escuro);
+    border-radius: 16px;
+    padding: 8px 16px;
+    background-color: var(--color-claro);
+    width: 100%;
+}
+
+.kpi-container h2 {
+    font-size: 1rem;
+    color: var(--color-escuro);
+}
+
+.kpi-container .kpi {
+    font-size: 1.75rem;
+    color: var(--escuro);
+    font-weight: 700;
+}
+
+.kpi.media-geral {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.kpi.media-geral::before {
+    width: 28px;
+    height: 28px;
+}
+
+.proporcao-avaliacoes-container {
+    width: 330px;
+    height: 330px;
+}
+
+.proporcao-avaliacoes-container h2 {
+    font-size: 1.5rem;
+    color: var(--escuro);
 }

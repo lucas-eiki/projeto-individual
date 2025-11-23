@@ -39,13 +39,16 @@ function buscarTop1() {
         COUNT(nota) numero_avaliacoes,
         COUNT(comentario) numero_comentarios,
         animacao.ano_lancamento,
+        categoria.nome categoria,
+        animacao.classificacao classificacao,
         animacao.imagem,
         (SELECT AVG(nota) FROM avaliacao) media_geral,
-        (SELECT COUNT(nota) FROM avaliacao) numero_avaliacoes_total,
-        (SELECT COUNT(comentario) FROM avaliacao) numero_comentarios_total
+        (SELECT COUNT(nota) FROM avaliacao) numero_avaliacoes_total
     FROM avaliacao
     JOIN animacao
         ON avaliacao.id_animacao = animacao.id
+    JOIN categoria
+        ON animacao.id_categoria = categoria.id
     GROUP BY id_animacao
     ORDER BY AVG(nota) DESC, COUNT(nota) DESC, COUNT(comentario) DESC
     LIMIT 1;
