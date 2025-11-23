@@ -188,7 +188,7 @@
 
                     while (indexAtual < numeroAvaliacoes) {
                         let avaliacao = avaliacoes[indexAtual]
-                        if (avaliacao.comentario.trim() != '' && avaliacao.id_usuario != sessionStorage.getItem('ID_USUARIO')) {
+                        if (avaliacao.comentario != null && avaliacao.id_usuario != sessionStorage.getItem('ID_USUARIO')) {
 
                             let estrelas = ''
                             for (let i = 0; i < 5; i++) {
@@ -286,6 +286,7 @@
 
             if (resposta.ok) {
                 window.alert("Post realizado com sucesso pelo usuario de ID: " + sessionStorage.getItem('ID_USUARIO') + "!");
+                obterDados(sessionStorage.getItem('ID_ANIMACAO'))
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
             } else {
@@ -356,12 +357,15 @@
                         vt_notas.push(qtdNotas[`nota${i}`])
                     }
 
-                    plotarGrafico(vt_notas)
+                    plotarGrafico(vt_notas, id_animacao)
                 })
             })
     }
 
-    function plotarGrafico(vt_notas) {
+    let isChartCreated = false
+    let myChart
+
+    function plotarGrafico(vt_notas, id_animacao) {
 
         let data = {
             labels: [5, 4, 3, 2, 1],
@@ -389,32 +393,60 @@
             options
         }
 
-        let myChart = new Chart(
-            document.getElementById('grafico-avaliacoes'),
-            config
-        );
+        if (!isChartCreated) {
+            myChart = new Chart(
+                document.getElementById('grafico-avaliacoes'),
+                config
+            );
+            isChartCreated = true
+        }
+
+        atualizarGrafico(id_animacao, data)
+    }
+
+    function atualizarGrafico(id_animacao, data) {
+        fetch(`/avaliacoes/obter/${id_animacao}`)
+            .then(function (resposta) {
+
+                resposta.json().then(function (resposta) {
+                    const qtdNotas = resposta[0]
+
+                    const vt_notas = []
+
+                    for (let i = 5; i > 0; i--) {
+                        vt_notas.push(qtdNotas[`nota${i}`])
+                    }
+
+                    data.datasets[0].data = vt_notas
+                    console.log(myChart);
+                    
+                    myChart.update()
+
+                    setTimeout(() => atualizarGrafico(id_animacao, data), 2000)
+                })
+            })
     }
 
     function obterGeneros(id_animacao) {
         let ul_lista_generos = document.getElementById('generos-container')
 
         fetch(`/generos/buscar/${id_animacao}`)
-        .then(function (resposta) {
-            if(resposta.ok) {
+            .then(function (resposta) {
+                if (resposta.ok) {
 
-                if(resposta.status == 204) {
-                    ul_lista_generos.innerHTML = '<li><span>Nenhum gênero registrado</span></li>'
-                } else {
-                    resposta.json().then(array => {
+                    if (resposta.status == 204) {
+                        ul_lista_generos.innerHTML = '<li><span>Nenhum gênero registrado</span></li>'
+                    } else {
+                        resposta.json().then(array => {
 
-                        array.forEach(genero => {
-                            ul_lista_generos.innerHTML += `<li><span>${genero.nome}</span></li>`
-                        });
-                    })
+                            array.forEach(genero => {
+                                ul_lista_generos.innerHTML += `<li><span>${genero.nome}</span></li>`
+                            });
+                        })
+                    }
                 }
-            }
-        }).catch(erro => {
-            console.log("Ocorreu um erro ao obter gêneros", erro);
-        })
+            }).catch(erro => {
+                console.log("Ocorreu um erro ao obter gêneros", erro);
+            })
     }
 </script>
