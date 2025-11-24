@@ -403,6 +403,7 @@ header nav {
     height: 75px;
     border: 2px solid var(--color-claro);
     border-radius: 100px;
+    object-fit: cover;
 }
 
 .li-avaliacao-container .comentario-container {
@@ -576,11 +577,28 @@ header nav {
 #main-perfil {
     display: flex;
     justify-content: center;
-    gap: 32px;
+    gap: 128px;
 }
 
 #main-perfil .perfil-container {
     display: flex;
     flex-direction: column;
     gap: 32px;
+}
+
+#main-perfil .perfil-container h1 {
+    color: var(--color-escuro);
+    font-size: 1.5rem;
+}
+
+#main-perfil .perfil-container span {
+    color: var(--escuro);
+    font-size: 2rem;
+}
+
+#main-perfil .perfil-container img {
+    width: 250px;
+    height: 250px;
+    border-radius: 200px;
+    object-fit: cover;
 }

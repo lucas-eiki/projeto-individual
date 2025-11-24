@@ -38,30 +38,7 @@
         </nav>
     </header>
 
-    <main id="main-perfil">
-        <!-- <div class="perfil-container">
-            <h1>
-                Bem vindo,<br>
-                <span>Usuário</span>!
-            </h1>
-            <img src="" alt="Imagem de perfil">
-            <input id="ipt_foto" type="file" />
-        </div>
-        <div class="form-container">
-            <div class="inputs-container">
-                <input type="text" placeholder="Nome" id="ipt_nome">
-                <input type="text" placeholder="Sobrenome" id="ipt_sobrenome">
-                <input type="text" placeholder="Apelido (opcional)" id="ipt_apelido">
-                <input type="password" placeholder="Senha atual" id="ipt_senha_atual">
-                <input type="password" placeholder="Senha nova" id="ipt_senha_nova">
-                <input type="password" placeholder="Confirme sua senha" id="ipt_senha_confirmacao">
-            </div>
-            <div class="login-buttons-container">
-                <button onclick="salvar()">Salvar</button>
-                <a href="./animacoes.html">Cancelar</a>
-            </div>
-        </div> -->
-    </main>
+    <main id="main-perfil"></main>
 
     <footer>
         <img class="logo-animotion" src="../assets/images/animotion-logo.png" alt="logo animotion">
@@ -165,7 +142,7 @@
             <div class="perfil-container">
                 <h1>
                     Bem vindo,<br>
-                    <span>${sessionStorage.getItem('APELIDO_USUARIO')}</span>!
+                    <span>${sessionStorage.getItem('APELIDO_USUARIO')}</span>
                 </h1>
                 <img src="${sessionStorage.getItem('IMAGEM_PERFIL_USUARIO')}" alt="Imagem de perfil">
                 <input id="ipt_foto" type="file" />
