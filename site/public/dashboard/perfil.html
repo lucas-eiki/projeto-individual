@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animotion</title>
+
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+
+    <script src="../js/sessao.js"></script>
+</head>
+
+<body onload="validarSessao(), exibirPerfil()">
+    <header>
+        <img class="logo-animotion" src="../assets/images/animotion-logo.png" alt="logo animotion">
+
+        <nav>
+            <ul class="links">
+                <li><a class="selecionado" href="./animacoes.html">Animações</a></li>
+                <li><a href="./estatisticas.html">Estatísticas</a></li>
+            </ul>
+            <div class="perfil-container">
+                <button onclick="toggleLinksPerfil()" class="btn-perfil-container">
+                    <img id="imagem-perfil" src="" alt="imagem de perfil">
+                    <div class="perfil-info-container">
+                        <span id="apelido-usuario">Apelido</span>
+                        <span id="email-usuario">E-mail</span>
+                    </div>
+                </button>
+                <div id="div-perfil-links" class="perfil-links-container">
+                    <a class="perfil-button perfil-link" href="./perfil.html">Perfil</a>
+                    <button onclick="finalizarSessao()" class="sair-button perfil-link">Sair</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-perfil">
+        <!-- <div class="perfil-container">
+            <h1>
+                Bem vindo,<br>
+                <span>Usuário</span>!
+            </h1>
+            <img src="" alt="Imagem de perfil">
+            <input id="ipt_foto" type="file" />
+        </div>
+        <div class="form-container">
+            <div class="inputs-container">
+                <input type="text" placeholder="Nome" id="ipt_nome">
+                <input type="text" placeholder="Sobrenome" id="ipt_sobrenome">
+                <input type="text" placeholder="Apelido (opcional)" id="ipt_apelido">
+                <input type="password" placeholder="Senha atual" id="ipt_senha_atual">
+                <input type="password" placeholder="Senha nova" id="ipt_senha_nova">
+                <input type="password" placeholder="Confirme sua senha" id="ipt_senha_confirmacao">
+            </div>
+            <div class="login-buttons-container">
+                <button onclick="salvar()">Salvar</button>
+                <a href="./animacoes.html">Cancelar</a>
+            </div>
+        </div> -->
+    </main>
+
+    <footer>
+        <img class="logo-animotion" src="../assets/images/animotion-logo.png" alt="logo animotion">
+        <p>Feito com carinho por Lucas Eiki Gushiken</p>
+        <div class="contatos">
+            <h3>Contatos</h3>
+            <div class="contatos-container">
+                <ul class="redes-sociais">
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/lucaseikigushiken/">
+                            <img src="../assets/images/icons/linkedin-icon.png" alt="logo do linkedin">
+                        </a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="https://github.com/lucas-eiki">
+                            <img src="../assets/images/icons/github-icon.png" alt="logo do github">
+                        </a>
+                    </li>
+                </ul>
+                <div class="email-container">
+                    <h4>E-mail:</h4>
+                    <p>lucas.gushiken@sptech.school</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+<script>
+    function salvar() {
+
+        if (ipt_nome.value.trim() == '' || ipt_sobrenome.value.trim() == '') {
+            alert('Preencha os campos de nome e sobrenome')
+        }
+        else if (ipt_senha_atual.value != sessionStorage.getItem('SENHA') && ipt_senha_nova.value.trim() != '') {
+            alert('Senha errada!')
+        }
+        else if (ipt_senha_nova.value != ipt_senha_confirmacao.value) {
+            alert('Senhas não correspondem')
+        }
+        else {
+            const formData = new FormData();
+            formData.append('foto', ipt_foto.files[0])
+            formData.append('nome', ipt_nome.value)
+            formData.append('sobrenome', ipt_sobrenome.value)
+            if (ipt_apelido.value.trim() != '') {
+                formData.append('apelido', ipt_apelido.value)
+            } else {
+                formData.append('apelido', sessionStorage.getItem('APELIDO_USUARIO'))
+            }
+            if (ipt_senha_nova.value.trim() != '') {
+                formData.append('senha', ipt_senha_nova.value)
+            } else {
+                formData.append('senha', sessionStorage.getItem('SENHA'))
+            }
+            fetch(`/usuarios/atualizar/${sessionStorage.getItem('ID_USUARIO')}`, {
+                method: "PUT",
+                body: formData
+            })
+                .then(res => {
+                    fetch("/usuarios/autenticar", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            emailServer: sessionStorage.getItem('EMAIL_USUARIO'),
+                            senhaServer: ipt_senha_nova.value.trim() != '' ?  ipt_senha_nova.value : sessionStorage.getItem('SENHA')
+                        })
+                    }).then(function (resposta) {
+                        console.log("ESTOU NO THEN DO entrar()!")
+
+                        if (resposta.ok) {
+                            console.log(resposta);
+
+                            resposta.json().then(json => {
+                                console.log(json);
+                                console.log(JSON.stringify(json));
+                                sessionStorage.ID_USUARIO = json.id;
+                                sessionStorage.NOME_USUARIO = json.nome;
+                                sessionStorage.SOBRENOME_USUARIO = json.sobrenome;
+                                sessionStorage.SENHA = json.senha;
+                                sessionStorage.EMAIL_USUARIO = json.email;
+                                sessionStorage.APELIDO_USUARIO = json.apelido;
+                                sessionStorage.IMAGEM_PERFIL_USUARIO = json.imagem_perfil;
+
+                                window.location = "./animacoes.html"
+
+                            });
+                        }
+                    })
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
+    }
+
+    function exibirPerfil() {
+        document.getElementById('main-perfil').innerHTML = `
+            <div class="perfil-container">
+                <h1>
+                    Bem vindo,<br>
+                    <span>${sessionStorage.getItem('APELIDO_USUARIO')}</span>!
+                </h1>
+                <img src="${sessionStorage.getItem('IMAGEM_PERFIL_USUARIO')}" alt="Imagem de perfil">
+                <input id="ipt_foto" type="file" />
+            </div>
+            <div class="form-container">
+                <div class="inputs-container">
+                    <input type="text" placeholder="Nome" id="ipt_nome" value="${sessionStorage.getItem('NOME_USUARIO')}">
+                    <input type="text" placeholder="Sobrenome" id="ipt_sobrenome" value="${sessionStorage.getItem('SOBRENOME_USUARIO')}">
+                    <input type="text" placeholder="Apelido (opcional)" id="ipt_apelido" value="${sessionStorage.getItem('APELIDO_USUARIO')}">
+                    <input type="password" placeholder="Senha atual" id="ipt_senha_atual">
+                    <input type="password" placeholder="Senha nova" id="ipt_senha_nova">
+                    <input type="password" placeholder="Confirme sua senha" id="ipt_senha_confirmacao">
+                </div>
+                <div class="login-buttons-container">
+                    <button onclick="salvar()">Salvar</button>
+                    <a href="./animacoes.html">Cancelar</a>
+                </div>
+            </div>
+        `
+    }
+</script>

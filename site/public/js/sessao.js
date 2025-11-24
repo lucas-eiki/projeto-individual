@@ -7,7 +7,7 @@ function validarSessao() {
     var email_usuario = document.getElementById("email-usuario");
 
     if (email != null && nome != null) {
-        imagem_perfil.src = sessionStorage.IMAGEM_PERFIL_USUARIO;
+        imagem_perfil.src =  sessionStorage.IMAGEM_PERFIL_USUARIO;
         apelido_usuario.innerHTML = sessionStorage.APELIDO_USUARIO;
         email_usuario.innerHTML = sessionStorage.EMAIL_USUARIO;
     } else {

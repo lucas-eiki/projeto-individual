@@ -20,7 +20,24 @@ function cadastrar(nome, sobrenome, apelido, email, senha) {
     return database.executar(instrucaoSql);
 }
 
+function atualizarPerfil(id_usuario, usuario) {
+    let imagem_perfil = usuario.imagem == null ? null : `${usuario.imagem}`
+
+    var instrucaoSql = `
+        UPDATE usuario SET 
+            nome = '${usuario.nome}', 
+            sobrenome = '${usuario.sobrenome}', 
+            senha = '${usuario.senha}', 
+            apelido = '${usuario.apelido}', 
+            imagem_perfil = ${imagem_perfil}
+        WHERE id = ${id_usuario}
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    atualizarPerfil
 };

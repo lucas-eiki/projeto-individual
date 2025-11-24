@@ -204,7 +204,7 @@
 
                             ul_lista_comentarios.innerHTML += `
                                 <li class="li-avaliacao-container">
-                                    <img class="imagem-perfil" src="${(avaliacao.imagem_perfil == null ? '../assets/avatar/avatar-generico.jpg' : avaliacao.imagem_perfil)}" alt="imagem de perfil">
+                                    <img class="imagem-perfil" src="${(avaliacao.imagem_perfil == null ? '../assets/avatar/avatar-generico.jpg' : `../assets/avatar/fotos-perfil/${avaliacao.imagem_perfil}`)}" alt="imagem de perfil">
                                     <div class="comentario-container">
                                         <div class="comentario-info">
                                             <div class="avaliacao-info">
@@ -338,7 +338,7 @@
                         }
 
                         document.getElementById('avaliacao-propria').innerHTML = `
-                            <img class="imagem-perfil" src="${(avaliacao.imagem_perfil == null ? '../assets/avatar/avatar-generico.jpg' : avaliacao.imagem_perfil)}" alt="imagem de perfil">
+                            <img class="imagem-perfil" src="${(avaliacao.imagem_perfil == null ? '../assets/avatar/avatar-generico.jpg' : `../assets/avatar/fotos-perfil/${avaliacao.imagem_perfil}`)}" alt="imagem de perfil">
                             <div class="comentario-container">
                                 <div class="comentario-info">
                                     <div class="avaliacao-info">

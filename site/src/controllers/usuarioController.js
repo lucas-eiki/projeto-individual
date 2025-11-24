@@ -27,7 +27,7 @@ function autenticar(req, res) {
                             email: resultadoAutenticar[0].email,
                             senha: resultadoAutenticar[0].senha,
                             apelido: resultadoAutenticar[0].apelido == null ? resultadoAutenticar[0].nome : resultadoAutenticar[0].apelido,
-                            imagem_perfil: resultadoAutenticar[0].imagem_perfil == null ? '../assets/avatar/avatar-generico.jpg' : resultadoAutenticar[0].imagem_perfil
+                            imagem_perfil: resultadoAutenticar[0].imagem_perfil == null ? '../assets/avatar/avatar-generico.jpg' : `../assets/avatar/fotos-perfil/${resultadoAutenticar[0].imagem_perfil}`
                         });
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
@@ -84,7 +84,30 @@ function cadastrar(req, res) {
     }
 }
 
+function atualizarPerfil(req, res) {
+    var id_usuario = req.params.id_usuario;
+    const imagem = req.file ? req.file.filename : null;
+    const { nome, sobrenome, apelido, senha } = req.body
+
+    const usuario = { nome, sobrenome, apelido, senha, imagem }
+
+    usuarioModel.atualizarPerfil(id_usuario, usuario)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao atualizar o perfil: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    atualizarPerfil
 }

@@ -570,3 +570,17 @@ header nav {
     font-size: 1.5rem;
     color: var(--escuro);
 }
+
+
+
+#main-perfil {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+}
+
+#main-perfil .perfil-container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
