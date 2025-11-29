@@ -9,7 +9,6 @@ function autenticar(email, senha) {
     return database.executar(instrucaoSql);
 }
 
-// Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
 function cadastrar(nome, sobrenome, apelido, email, senha) {
     var apelidoVar = apelido.trim() == '' ? null : `'${apelido}'`
 
