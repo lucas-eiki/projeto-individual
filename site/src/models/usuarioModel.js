@@ -11,7 +11,7 @@ function autenticar(email, senha) {
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
 function cadastrar(nome, sobrenome, apelido, email, senha) {
-    var apelidoVar = apelido.trim() == '' ? null : `${apelido}`
+    var apelidoVar = apelido.trim() == '' ? null : `'${apelido}'`
 
     var instrucaoSql = `
         INSERT INTO usuario (nome, sobrenome, apelido, email, senha) VALUES ('${nome}', '${sobrenome}', ${apelidoVar}, '${email}', '${senha}');
