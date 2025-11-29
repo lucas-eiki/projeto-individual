@@ -220,6 +220,7 @@
                         }
                         indexAtual++
                     }
+                    obterDados(sessionStorage.getItem('ID_ANIMACAO'))
                     setTimeout(() => {
                         if (ul_lista_comentarios.innerHTML == '' && document.getElementById('avaliacao-propria').innerHTML == '') {
                             ul_lista_comentarios.innerHTML = '<p>Nenhum comentário ainda...</p>'
@@ -290,7 +291,6 @@
 
                 if (resposta.ok) {
                     window.alert("Post realizado com sucesso pelo usuario de ID: " + sessionStorage.getItem('ID_USUARIO') + "!");
-                    obterDados(sessionStorage.getItem('ID_ANIMACAO'))
                     buscarAvaliacao()
                     exibirAnimacao()
                 } else if (resposta.status == 404) {
@@ -392,45 +392,45 @@
 
     function plotarGrafico(vt_notas, id_animacao) {
 
-        let data = {
-            labels: [5, 4, 3, 2, 1],
-            datasets: [{
-                label: 'Quantidade de avaliações',
-                data: vt_notas,
-                borderWidth: 1,
-                backgroundColor: '#EAAB39',
-                borderRadius: 8
-            }]
-        }
+        if (!isChartCreated) {
+            let data = {
+                labels: [5, 4, 3, 2, 1],
+                datasets: [{
+                    label: 'Quantidade de avaliações',
+                    data: vt_notas,
+                    borderWidth: 1,
+                    backgroundColor: '#EAAB39',
+                    borderRadius: 8
+                }]
+            }
 
-        let options = {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            },
-            indexAxis: 'y',
-            plugins: {
-                tooltip: {
-                    titleFont: {
-                        size: 18,
-                        weight: 500
-                    },
-                    bodyFont: {
-                        size: 20,
-                        weight: 600
+            let options = {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                indexAxis: 'y',
+                plugins: {
+                    tooltip: {
+                        titleFont: {
+                            size: 18,
+                            weight: 500
+                        },
+                        bodyFont: {
+                            size: 20,
+                            weight: 600
+                        }
                     }
                 }
             }
-        }
 
-        let config = {
-            type: 'bar',
-            data,
-            options
-        }
+            let config = {
+                type: 'bar',
+                data,
+                options
+            }
 
-        if (!isChartCreated) {
             myChart = new Chart(
                 document.getElementById('grafico-avaliacoes'),
                 config
@@ -438,17 +438,14 @@
             isChartCreated = true
         }
 
-        atualizarGrafico(id_animacao, data)
+        atualizarGrafico(id_animacao)
     }
 
-    function atualizarGrafico(id_animacao, data) {
+    function atualizarGrafico(id_animacao) {
         fetch(`/avaliacoes/obter/${id_animacao}`)
             .then(function (resposta) {
 
-                if (resposta.status == 204) {
-                    setTimeout(() => atualizarGrafico(id_animacao, data), 2000)
-                }
-                else {
+                if (resposta.status == 200) {
                     resposta.json().then(function (resposta) {
                         const qtdNotas = resposta[0]
 
@@ -458,11 +455,9 @@
                             vt_notas.push(qtdNotas[`nota${i}`])
                         }
 
-                        data.datasets[0].data = vt_notas
+                        myChart.data.datasets[0].data = vt_notas
 
                         myChart.update()
-
-                        setTimeout(() => atualizarGrafico(id_animacao, data), 2000)
                     })
                 }
             })
