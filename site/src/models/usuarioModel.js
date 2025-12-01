@@ -20,7 +20,7 @@ function cadastrar(nome, sobrenome, apelido, email, senha) {
 }
 
 function atualizarPerfil(id_usuario, usuario) {
-    let imagem_perfil = usuario.imagem == null ? null : `${usuario.imagem}`
+    let imagem_perfil = usuario.imagem == null ? null : `'${usuario.imagem}'`
 
     var instrucaoSql = `
         UPDATE usuario SET 
