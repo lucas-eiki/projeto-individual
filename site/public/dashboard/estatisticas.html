@@ -83,7 +83,7 @@
                     let imagem = animacao.imagem == null ? 'https://placehold.co/312x468?text=Imagem+não+encontrada' : animacao.imagem
 
                     document.getElementById('main-estatistica').innerHTML += `
-                        <h1>Melhor animação do momento</h1>
+                        <h1>Melhor animação do momento (maior nota média)</h1>
                         <div class="melhor-animacao-container">
                             <div class="melhor-animacao">
                                 <img class="img-melhor-animacao" src="${imagem}" alt="imagem da animacao">
@@ -127,7 +127,7 @@
                                     </div>
                                 </div>
                                 <div class="proporcao-avaliacoes-container">
-                                    <h2>Proporção em relação ao total de avaliações (%)</h2>
+                                    <h2>Proporção do número de avaliações em relação ao número total de avaliações (%)</h2>
                                     <canvas id="proporcao-avaliacoes"></canvas>
                                 </div>
                             </div>
