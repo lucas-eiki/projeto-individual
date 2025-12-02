@@ -138,6 +138,10 @@ header nav a {
     font-size: 1.25rem;
 }
 
+.hero-cta .login-button:hover {
+    text-decoration: underline;
+}
+
 
 
 h2 {
