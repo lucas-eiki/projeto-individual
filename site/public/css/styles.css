@@ -531,6 +531,7 @@ footer .contatos {
 .login-container {
     display: flex;
     justify-content: center;
+    padding: 32px 0;
 }
 
 .form-container {
