@@ -580,6 +580,7 @@ header nav {
     display: flex;
     justify-content: center;
     gap: 128px;
+    padding: 64px 0;
 }
 
 #main-perfil .perfil-container {
