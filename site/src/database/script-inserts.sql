@@ -1,3 +1,21 @@
+INSERT INTO categoria (nome) VALUES
+	('2D'),
+	('3D'),
+	('Stop Motion'),
+	('Anime');
+
+INSERT INTO genero (nome) VALUES
+	('Ação'),
+	('Comédia'),
+	('Drama'),
+	('Terror'),
+	('Romance'),
+	('Fantasia'),
+	('Suspense'),
+	('Ficção científica'),
+	('Aventura'),
+	('Mistério');
+
 INSERT INTO animacao (titulo, sinopse, ano_lancamento, imagem, classificacao, id_categoria) VALUES
     ('Kung Fu Panda', 'Po é um panda que trabalha na loja de macarrão da sua família e sonha em transformar-se em um mestre de kung fu. Seu sonho se torna realidade quando, inesperadamente, ele deve cumprir uma profecia antiga e estudar a arte marcial com seus ídolos, os Cinco Furiosos. Po precisa de toda a sabedoria, força e habilidade que conseguir reunir para proteger seu povo de um leopardo da neve malvado.', 2008, 'https://upload.wikimedia.org/wikipedia/pt/thumb/7/76/Kungfupanda.jpg/250px-Kungfupanda.jpg', 0, 2),
 
@@ -143,21 +161,3 @@ INSERT INTO genero_da_animacao (id_animacao, id_genero) VALUES
 	(29, 6),
 	(29, 9),
 	(29, 2);
-
-INSERT INTO categoria (nome) VALUES
-	('2D'),
-	('3D'),
-	('Stop Motion'),
-	('Anime');
-
-INSERT INTO genero (nome) VALUES
-	('Ação'),
-	('Comédia'),
-	('Drama'),
-	('Terror'),
-	('Romance'),
-	('Fantasia'),
-	('Suspense'),
-	('Ficção científica'),
-	('Aventura'),
-	('Mistério');
